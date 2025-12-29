@@ -1,0 +1,1837 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>MammothModa</title>
+    <meta name="description" content="A Unified AR-Diffusion Framework for Multimodal Understanding and Generation">
+    <meta name="keywords" content="Video Generation, Multi-Modal">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ffffff">
+    <meta property="og:image" content="">
+    <link rel="stylesheet" href="./assets/index.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.2/css/bootstrap.min.css'>
+    <link rel="shortcut icon" href="./assets/logo.png" type="image/png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.2/js/bootstrap.min.js"></script>
+    <style>
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-stretch: 100%;
+            font-display: block;
+            font-weight: 300 700;
+            src: url('./assets/roboto.woff2') format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+
+        @font-face {
+            font-family: 'DancingScript';
+            src: url('./assets/DancingScript-Bold.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Caveat';
+            src: url('./assets/Caveat-Medium.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Alegreya';
+            src: url('./assets/Alegreya-Regular.ttf') format('truetype');
+        }
+
+        :root {
+            --bg: #ffffff;
+            --bg-alt: #f7f7fb;
+            --surface: rgba(255, 255, 255, 0.72);
+            --text: #0b0d12;
+            --muted: #5a6372;
+            --border: rgba(15, 23, 42, 0.12);
+            --accent-1: #2563eb;
+            --accent-2: #7c3aed;
+            --shadow: 0 18px 50px rgba(2, 6, 23, 0.12);
+            --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+            --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        video {
+            background-color: #000000;
+            aspect-ratio: 16 / 9;
+            border-radius: 22px;
+            box-shadow: var(--shadow);
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-sans);
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-synthesis-weight: none;
+            font-optical-sizing: auto;
+            overflow-x: hidden;
+        }
+
+        #intro {
+            padding: 96px 0 36px 0;
+            justify-content: center;
+            /* Center content vertically */
+            text-align: center;
+            /* Center text alignment */
+            color: var(--text);
+            /* Ensure text color is readable */
+            background:
+                radial-gradient(1200px 600px at 18% 18%, rgba(124, 58, 237, 0.14), rgba(255, 255, 255, 0) 60%),
+                radial-gradient(900px 520px at 78% 12%, rgba(37, 99, 235, 0.12), rgba(255, 255, 255, 0) 55%),
+                linear-gradient(180deg, #ffffff 0%, var(--bg-alt) 100%);
+            border-bottom: 1px solid var(--border);
+        }
+
+        #intro h1 {
+            font-size: clamp(44px, 6vw, 74px);
+            font-family: "Roboto", var(--font-sans);
+            font-weight: 300;
+            letter-spacing: -0.01em;
+            line-height: 1.08;
+            margin: 20px 0;
+        }
+
+        #intro h2 {
+            margin: 20px 0 40px 0;
+            font-weight: 420;
+            font-size: clamp(18px, 2.2vw, 28px);
+            color: var(--muted);
+        }
+
+        #intro h2 strong {
+            color: var(--text);
+        }
+
+        .authors {
+            max-width: 900px;
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--muted);
+            text-align: center;
+            margin-bottom: 25px;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .author-block {
+            display: inline-block;
+            margin: 0 10px 0 10px;
+        }
+
+        .author-block a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .author-block a:hover {
+            color: var(--accent-1);
+        }
+
+        .author-affiliation {
+            font-size: 16px;
+            color: var(--muted);
+            text-align: center;
+            margin-bottom: 60px;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .author-affiliation .author-block {
+            display: inline-block;
+            margin: 0 15px;
+        }
+
+        section {
+            width: 100%;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .button {
+            background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 100px;
+            cursor: pointer;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+            text-decoration: none;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            display: inline-block;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            box-shadow: 0 12px 30px rgba(37, 99, 235, 0.18);
+            font-weight: 600;
+        }
+
+        .button:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.02);
+            box-shadow: 0 16px 40px rgba(37, 99, 235, 0.22);
+        }
+
+        .bibtex-section {
+            background-color: var(--bg-alt);
+            padding: 56px 24px;
+            /* padding: 20px; */
+            text-align: center;
+            margin-top: 60px;
+            color: var(--text);
+            /* max-width: 800px; */
+            border-top: 1px solid var(--border);
+        }
+
+        .bibtex-section h3 {
+            font-size: 24px;
+            font-weight: 650;
+            color: var(--text);
+            margin-bottom: 20px;
+        }
+
+        .bibtex-code {
+            background-color: #ffffff;
+            color: #111827;
+            padding: 20px;
+            border-radius: 16px;
+            text-align: left;
+            display: inline-block;
+            font-family: var(--font-mono);
+            /* max-width: 800px; */
+            overflow-x: auto;
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px rgba(2, 6, 23, 0.08);
+        }
+
+        section {
+            margin-top: 80px;
+        }
+
+        section:first-of-type {
+            margin-top: 0;
+        }
+
+        .title {
+            background: var(--surface);
+            backdrop-filter: blur(14px);
+            position: sticky;
+            top: 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            z-index: 1000;
+            min-height: 64px;
+            box-sizing: border-box;
+            color: var(--text);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .description {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px 24px 22px 24px;
+            color: var(--muted);
+            line-height: 1.65;
+            font-weight: 420;
+        }
+
+        .highlight {
+            color: var(--text);
+            font-weight: 650;
+        }
+
+        .flex-row {
+            display: flex;
+            column-gap: 5px;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            padding: 0 5px 5px 5px;
+
+        }
+
+        .flex-row>div {
+            flex-grow: 1;
+            flex-basis: 0;
+            position: relative;
+        }
+
+        .flex>div {
+            flex: 1 1 calc(33.333% - 14px);
+            width: auto;
+            margin-top: 0;
+            margin-bottom: 0;
+            position: relative;
+        }
+
+        .flex {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 14px;
+            padding: 0 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .prompt-wrap {
+            position: relative;
+            border-radius: 22px;
+            overflow: hidden;
+        }
+
+        .flex-2 {
+            justify-content: center;
+            column-gap: 5px;
+        }
+
+        .flex-2>div {
+            width: calc(100% / 2 - 5px / 2);
+            min-width: calc(100% / 3 - 5px * 2 / 3);
+            max-width: calc(100vh - 200px);
+        }
+
+        video,
+        img {
+            width: 100%;
+        }
+
+        .loading-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: rgba(255, 255, 255, 0.6);
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .loading-text {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .loading-icon {
+            font-size: 48px;
+        }
+
+        .prompt {
+            max-width: calc(100% - 20px);
+            position: absolute;
+            background: rgba(0, 0, 0, 0.5);
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 10px;
+            backdrop-filter: blur(10px);
+            top: 10px;
+            left: 10px;
+            padding: 5px 10px;
+            border-radius: 15px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s;
+            box-sizing: border-box;
+            white-space: pre-line;
+        }
+
+        .flex-very-compact .full-screen-button {
+            width: 100%;
+            height: 100%;
+            top: 0;
+            right: 0;
+            border-radius: 0;
+        }
+
+        .chinese {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-weight: bold;
+            color: #d18585;
+            font-size: 1.1em;
+        }
+
+
+        .prompt-wrap:hover .prompt {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        @media (hover: hover) {
+
+            .full-screen-wrap:hover .full-screen-button {
+                opacity: 1;
+                pointer-events: all;
+            }
+
+            #contributors a:hover {
+                background-color: #222;
+            }
+        }
+
+        @media (hover: none) {
+            #contributors a {
+                pointer-events: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .flex-dynamic>div {
+                width: calc(100% / 2 - 5px / 2);
+            }
+        }
+
+        @media (max-width: 640px) {
+            #intro h1 {
+                font-size: 50px;
+            }
+
+            #intro h2 {
+                font-size: 20px;
+            }
+
+            .ruler {
+                font-size: 10px;
+            }
+        }
+
+        @media (max-width: 512px) {
+
+            .flex-dynamic>div,
+            .flex-dynamic-1>div {
+                width: 100%;
+            }
+
+            .content {
+                padding: 0 12px;
+            }
+
+            .description {
+                padding: 0 12px 20px 12px;
+            }
+
+            .title {
+                padding: 20px 12px;
+            }
+
+            .ruler-tight {
+                font-size: 6px;
+                column-gap: 0;
+            }
+
+            .title-long {
+                font-size: 16px;
+            }
+
+        }
+
+        .margin-top {
+            margin-top: 50px;
+        }
+
+        .ruler {
+            text-align: center;
+            position: sticky;
+            top: 64px;
+            z-index: 999;
+            background: var(--surface);
+            backdrop-filter: blur(14px);
+            color: var(--muted);
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .ruler>div {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .selected {
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.35);
+        }
+
+        #title-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (max-width: 768px) {
+            #title-container {
+                text-size-adjust: 80%;
+            }
+        }
+
+        #title-icon {
+            height: 8em;
+            width: auto;
+            margin-right: 0.35em;
+            vertical-align: middle;
+        }
+
+        @media (max-width: 768px) {
+            #title-icon {
+                height: 5em;
+                width: auto;
+            }
+        }
+
+        .title-art {
+            font-family: var(--font-sans);
+        }
+
+        .title-art2 {
+            font-family: var(--font-sans);
+        }
+
+        .title-art3 {
+            font-family: var(--font-sans);
+        }
+
+        h2 {
+            font-size: 2.5em;
+            color: var(--text);
+            text-shadow: none;
+        }
+
+        #video-wrapper {
+            border-radius: 50px;
+            max-width: 720px;
+            padding-bottom: 40%;
+            margin: 0 auto;
+            background: transparent;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        .ethics-section {
+            padding: 72px 0;
+            text-align: center;
+            margin-top: 60px;
+            color: var(--muted);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .ethics-section {
+                padding: 30px 10%;
+            }
+        }
+
+        .acknowledgements-section {
+            padding: 100px 10%;
+            text-align: center;
+            margin-top: 60px;
+            color: #ccc;
+            max-width: 1500px;
+            margin: 0 auto;
+        }
+
+        .video-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-height: 50vh;
+        }
+
+        .video-container video {
+            width: 100%;
+            max-width: 800px;
+            max-height: 450px;
+            height: auto;
+        }
+
+        .arch-container {
+            max-width: 1200px;
+            margin: 18px auto 0 auto;
+            padding: 0 24px;
+        }
+
+        .arch-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        @media (max-width: 980px) {
+            .arch-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .arch-item {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .arch-label {
+            font-size: 13px;
+            font-weight: 650;
+            color: var(--muted);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .arch-figure {
+            width: 100%;
+            height: auto;
+            border-radius: 0;
+            border: 0;
+            background: #ffffff;
+            display: block;
+        }
+
+        .arch-placeholder {
+            width: 100%;
+            min-height: 320px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            color: var(--muted);
+            border-radius: 0;
+            border: 0;
+            background: var(--bg-alt);
+        }
+
+        .edit-image {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            display: block;
+            background: #000000;
+        }
+
+        .edit-placeholder {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            color: var(--muted);
+            background: var(--bg-alt);
+        }
+
+        .highlights-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 24px;
+        }
+
+        @media (max-width: 980px) {
+            .highlights-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 640px) {
+            .highlights-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .highlight {
+            padding-top: 14px;
+            border-top: 1px solid var(--border);
+        }
+
+        .highlight-title {
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+
+        .highlight-text {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .showcase-tabs {
+            margin: 20px auto 18px auto;
+            padding: 0 24px;
+            max-width: 1200px;
+            gap: 10px;
+        }
+
+        .showcase-tabs .nav-link {
+            border-radius: 999px;
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            font-weight: 650;
+        }
+
+        .showcase-tabs .nav-link.active {
+            color: #ffffff;
+            background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 14px 34px rgba(37, 99, 235, 0.18);
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            padding: 0 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 1080px) {
+            .showcase-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 640px) {
+            .showcase-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .showcase-card {
+            border-radius: 22px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.82);
+            box-shadow: 0 14px 40px rgba(2, 6, 23, 0.09);
+        }
+
+        .showcase-card .prompt-wrap {
+            border-radius: 0;
+        }
+
+        .showcase-meta {
+            padding: 12px 14px 14px 14px;
+            border-top: 1px solid var(--border);
+            display: grid;
+            row-gap: 10px;
+        }
+
+        .showcase-prompt-preview {
+            color: var(--text);
+            font-size: 13px;
+            line-height: 1.55;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            opacity: 0.92;
+        }
+
+        .showcase-actions {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .showcase-prompt-btn {
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.7);
+            color: var(--text);
+            padding: 6px 12px;
+            font-weight: 650;
+            font-size: 12px;
+        }
+
+        .showcase-prompt-btn:hover {
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .units-rule {
+            display: grid;
+            grid-auto-flow: column;
+            justify-content: center;
+            align-items: center;
+            column-gap: 0.75rem;
+        }
+
+        .units-rule i {
+            display: block;
+            width: 1px;
+            height: 1em;
+            background: currentColor;
+            opacity: 0.25;
+            /* 细且淡的竖线 */
+        }
+
+        /* 虚拟进度条样式 */
+        .video-wrapper {
+            position: relative;
+        }
+
+        .video-progress-container {
+            position: absolute;
+            bottom: 4%;
+            left: 5%;
+            right: 5%;
+            height: 4px;
+            background: rgba(200, 200, 200, 0.5);
+            border-radius: 2px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+        }
+
+        .video-wrapper:hover .video-progress-container,
+        .prompt-wrap:hover .video-progress-container {
+            opacity: 1;
+        }
+
+        .video-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: rgba(225, 225, 225, 1);
+            border-radius: 2px;
+            transition: width 0.1s linear;
+        }
+
+        .video-progress-time {
+            position: absolute;
+            top: -24px;
+            right: 0;
+            font-family: 'Roboto', sans-serif;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.8);
+            background: rgba(0, 0, 0, 0);
+            padding: 3px 8px;
+            border-radius: 3px;
+        }
+
+        .video-progress-gradient {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 25%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.97) 0%, rgba(0, 0, 0, 0) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 9;
+            pointer-events: none;
+        }
+
+        .video-wrapper:hover .video-progress-gradient,
+        .prompt-wrap:hover .video-progress-gradient {
+            opacity: 1;
+        }
+
+        /* Tooltip 容器 */
+        .tooltip-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Tooltip 文本 */
+        .tooltip-text {
+            visibility: hidden;
+            width: 220px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            /* 显示在上方 */
+            left: 50%;
+            margin-left: -110px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 12px;
+            font-weight: normal;
+            line-height: 1.4;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 底部小箭头 */
+        .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #333 transparent transparent transparent;
+        }
+
+        /* 悬停显示 */
+        .tooltip-container:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        #try-now-hint {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+            display: none;
+        }
+
+        #try-now-star {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            #try-now-hint {
+                font-size: 13px;
+                color: #888;
+                line-height: 1.5;
+                display: block;
+            }
+            #try-now-star {
+                display: inline;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section id="intro">
+        <div class="content">
+            <div id="title-container">
+                <img id="title-icon" src="./assets/logo.png" alt="Icon">
+                <h1><strong>MammothModa</strong></h1>
+            </div>
+            <h2><strong>A Unified AR-Diffusion Framework for Multimodal Understanding and Generation</strong></h2>
+            <div class="authors">
+                
+            </div>
+
+            
+
+            <a class="button" href="https://github.com/bytedance/mammothmoda" target="_blank" rel="noopener noreferrer">
+                GitHub
+            </a>
+ 
+        </div>
+    </section>
+
+    <div class="container text-center" style="margin-top: 50px; text-align: center;">
+        <p class="title-art3" style="font-size: 1.6em;"> Unified AR-Diffusion for Multimodal Understanding and Generation</p>
+        <p class="description" style="font-size: 1.0em;"> Architectures</p>
+    </div>
+
+    <div class="arch-container">
+        <div class="arch-grid">
+            <div class="arch-item">
+                <div class="arch-label">Unified Architecture</div>
+                <img class="arch-figure" src="./assets/arch.png" alt="Unified architecture diagram">
+            </div>
+            <div class="arch-item">
+                <div class="arch-label">MoE DiT Architecture</div>
+                <img class="arch-figure" src="./assets/dit_moe.png" alt="MoE DiT architecture diagram"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="arch-placeholder" style="display: none;">Upload assets/dit_moe.png to replace this placeholder.</div>
+            </div>
+        </div>
+    </div>
+
+    <section id="experiment-highlights">
+        <div class="title">
+            Experiment Highlights
+        </div>
+
+        <div class="description">
+            Key takeaways from our experiments across understanding, generation, and editing.
+        </div>
+
+        <div class="highlights-wrap">
+            <div class="highlights-grid">
+                <div class="highlight">
+                    <div class="highlight-title">Unified Multimodal Capability</div>
+                    <p class="highlight-text">One unified model covers multimodal understanding, generation, and instruction-based editing.</p>
+                </div>
+                <div class="highlight">
+                    <div class="highlight-title">AR Semantic Planning</div>
+                    <p class="highlight-text">Autoregressive planning provides structured semantics that improves controllability and compositionality.</p>
+                </div>
+                <div class="highlight">
+                    <div class="highlight-title">Diffusion Decoding</div>
+                    <p class="highlight-text">Diffusion decoding translates planned semantics into high-fidelity visual outputs across modalities.</p>
+                </div>
+                <div class="highlight">
+                    <div class="highlight-title">MoE DiT Scaling</div>
+                    <p class="highlight-text">MoE DiT supports scalable capacity for video generation while keeping routing flexible.</p>
+                </div>
+                <div class="highlight">
+                    <div class="highlight-title">Strong Instruction Following</div>
+                    <p class="highlight-text">Consistent instruction following across camera motion, subject actions, and stylization.</p>
+                </div>
+                <div class="highlight">
+                    <div class="highlight-title">Multimodal Editing</div>
+                    <p class="highlight-text">Unified editing interface for both images and videos with temporally coherent edits.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="video-showcase">
+        <div class="title">
+            Text-to-Video
+        </div>
+
+        <div class="description">
+            Cards with prompt preview and a modal for full prompts.
+        </div>
+
+        <ul class="nav nav-pills justify-content-center showcase-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="pill" href="#tab-instruction" role="tab">Instruction Following</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="pill" href="#tab-motion" role="tab">Motion Quality</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="pill" href="#tab-camera" role="tab">Camera & Scenes</a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="tab-instruction" role="tabpanel">
+                <div class="showcase-grid">
+                    <div class="showcase-card">
+                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                            <div class="loading-placeholder">
+                                <div class="loading-text">Loading...</div>
+                                <div class="loading-icon">&#9749</div>
+                            </div>
+                            <video autoplay muted playsinline loop
+                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_0.mp4"></video>
+                            <div class="video-progress-gradient"></div>
+                            <div class="video-progress-container">
+                                <div class="video-progress-bar"></div>
+                                <div class="video-progress-time">0:00 / 0:00</div>
+                            </div>
+                            <div class="prompt">Depict a scenario where an individual is faced with a difficult choice that tests their principles. The camera captures the weight of the decision,</div>
+                        </div>
+                        <div class="showcase-meta">
+                            <div class="showcase-prompt-preview"></div>
+                            <div class="showcase-actions">
+                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="showcase-card">
+                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                            <div class="loading-placeholder">
+                                <div class="loading-text">Loading...</div>
+                                <div class="loading-icon">&#9749</div>
+                            </div>
+                            <video autoplay muted playsinline loop
+                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_1.mp4"></video>
+                            <div class="video-progress-gradient"></div>
+                            <div class="video-progress-container">
+                                <div class="video-progress-bar"></div>
+                                <div class="video-progress-time">0:00 / 0:00</div>
+                            </div>
+                            <div class="prompt">A close-up shot of a fox cautiously approaching the camera, sniffing at the lens curiously. The camera captures the fox’s inquisitive expression, the twitching of its nose, and the rustling of leaves under its paws.</div>
+                        </div>
+                        <div class="showcase-meta">
+                            <div class="showcase-prompt-preview"></div>
+                            <div class="showcase-actions">
+                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="showcase-card">
+                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                            <div class="loading-placeholder">
+                                <div class="loading-text">Loading...</div>
+                                <div class="loading-icon">&#9749</div>
+                            </div>
+                            <video autoplay muted playsinline loop
+                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_2.mp4"></video>
+                            <div class="video-progress-gradient"></div>
+                            <div class="video-progress-container">
+                                <div class="video-progress-bar"></div>
+                                <div class="video-progress-time">0:00 / 0:00</div>
+                            </div>
+                            <div class="prompt">An aerial shot of a swarm of drones flying in formation, mimicking the behavior of a flock of birds. The camera captures the synchronized movements, the technological design of the drones, and the interplay between natural and artificial intelligence.</div>
+                        </div>
+                        <div class="showcase-meta">
+                            <div class="showcase-prompt-preview"></div>
+                            <div class="showcase-actions">
+                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="showcase-card">
+                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                            <div class="loading-placeholder">
+                                <div class="loading-text">Loading...</div>
+                                <div class="loading-icon">&#9749</div>
+                            </div>
+                            <video autoplay muted playsinline loop
+                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_3.mp4"></video>
+                            <div class="video-progress-gradient"></div>
+                            <div class="video-progress-container">
+                                <div class="video-progress-bar"></div>
+                                <div class="video-progress-time">0:00 / 0:00</div>
+                            </div>
+                            <div class="prompt">A deserted tropical island with crystal-clear waters, dense palm trees, and a sandy beach. The camera slowly pans across the island, revealing a hidden cove with a small, makeshift shelter and a campfire. The animation emphasizes the serene beauty of the natural environment, with attention to the gentle sway of the palm trees and the sparkling reflections on the water.</div>
+                        </div>
+                        <div class="showcase-meta">
+                            <div class="showcase-prompt-preview"></div>
+                            <div class="showcase-actions">
+                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="showcase-card">
+                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                            <div class="loading-placeholder">
+                                <div class="loading-text">Loading...</div>
+                                <div class="loading-icon">&#9749</div>
+                            </div>
+                            <video autoplay muted playsinline loop
+                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_4.mp4"></video>
+                            <div class="video-progress-gradient"></div>
+                            <div class="video-progress-container">
+                                <div class="video-progress-bar"></div>
+                                <div class="video-progress-time">0:00 / 0:00</div>
+                            </div>
+                            <div class="prompt">A close-up shot of a hummingbird hovering in front of a brightly colored flower, its wings a blur of motion. The camera focuses on the precision of its hovering, the quick darting movements, and the delicate sipping of nectar.</div>
+                        </div>
+                        <div class="showcase-meta">
+                            <div class="showcase-prompt-preview"></div>
+                            <div class="showcase-actions">
+                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="showcase-card">
+                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                            <div class="loading-placeholder">
+                                <div class="loading-text">Loading...</div>
+                                <div class="loading-icon">&#9749</div>
+                            </div>
+                            <video autoplay muted playsinline loop
+                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_5.mp4"></video>
+                            <div class="video-progress-gradient"></div>
+                            <div class="video-progress-container">
+                                <div class="video-progress-bar"></div>
+                                <div class="video-progress-time">0:00 / 0:00</div>
+                            </div>
+                            <div class="prompt">A wide shot of a group of friends, all in their late 20s, enjoying a sunny day in a backyard. Some are grilling food, others are sitting at a picnic table, and a couple is playing with a dog. The camera captures the laughter, the food being passed around, and the casual, friendly interactions.</div>
+                        </div>
+                        <div class="showcase-meta">
+                            <div class="showcase-prompt-preview"></div>
+                            <div class="showcase-actions">
+                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="tab-motion" role="tabpanel">
+                <div class="showcase-grid">
+                    <div class="showcase-card">
+                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                            <div class="loading-placeholder">
+                                <div class="loading-text">Loading...</div>
+                                <div class="loading-icon">&#9749</div>
+                            </div>
+                            <video autoplay muted playsinline loop
+                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_7.mp4"></video>
+                            <div class="video-progress-gradient"></div>
+                            <div class="video-progress-container">
+                                <div class="video-progress-bar"></div>
+                                <div class="video-progress-time">0:00 / 0:00</div>
+                            </div>
+                            <div class="prompt">Show a group of people debating a challenging decision that could have far-reaching consequences. The camera highlights the varying perspectives and moral considerations.</div>
+                        </div>
+                        <div class="showcase-meta">
+                            <div class="showcase-prompt-preview"></div>
+                            <div class="showcase-actions">
+                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="showcase-card">
+                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                            <div class="loading-placeholder">
+                                <div class="loading-text">Loading...</div>
+                                <div class="loading-icon">&#9749</div>
+                            </div>
+                            <video autoplay muted playsinline loop
+                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_8.mp4"></video>
+                            <div class="video-progress-gradient"></div>
+                            <div class="video-progress-container">
+                                <div class="video-progress-bar"></div>
+                                <div class="video-progress-time">0:00 / 0:00</div>
+                            </div>
+                            <div class="prompt">A static close-up shot shows a digital clock with a green number rapidly counting up from 10:47 to 12:45. The entire scene in the video remains unchanged.</div>
+                        </div>
+                        <div class="showcase-meta">
+                            <div class="showcase-prompt-preview"></div>
+                            <div class="showcase-actions">
+                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="showcase-card">
+                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                            <div class="loading-placeholder">
+                                <div class="loading-text">Loading...</div>
+                                <div class="loading-icon">&#9749</div>
+                            </div>
+                            <video autoplay muted playsinline loop
+                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_9.mp4"></video>
+                            <div class="video-progress-gradient"></div>
+                            <div class="video-progress-container">
+                                <div class="video-progress-bar"></div>
+                                <div class="video-progress-time">0:00 / 0:00</div>
+                            </div>
+                            <div class="prompt">The camera remains still, a girl with a ponytail and wearing a yellow dress walks forward with a metal bucket of water in her hand, the background is a garden path, soft afternoon sunlight.</div>
+                        </div>
+                        <div class="showcase-meta">
+                            <div class="showcase-prompt-preview"></div>
+                            <div class="showcase-actions">
+                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="showcase-card">
+                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                            <div class="loading-placeholder">
+                                <div class="loading-text">Loading...</div>
+                                <div class="loading-icon">&#9749</div>
+                            </div>
+                            <video autoplay muted playsinline loop
+                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_10.mp4"></video>
+                            <div class="video-progress-gradient"></div>
+                            <div class="video-progress-container">
+                                <div class="video-progress-bar"></div>
+                                <div class="video-progress-time">0:00 / 0:00</div>
+                            </div>
+                            <div class="prompt">The camera remains still, a man with a beard and wearing a green sweater holds a ceramic mug with his hand and moves it, the background is a cozy kitchen, warm indoor lighting.</div>
+                        </div>
+                        <div class="showcase-meta">
+                            <div class="showcase-prompt-preview"></div>
+                            <div class="showcase-actions">
+                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="showcase-card">
+                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                            <div class="loading-placeholder">
+                                <div class="loading-text">Loading...</div>
+                                <div class="loading-icon">&#9749</div>
+                            </div>
+                            <video autoplay muted playsinline loop
+                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_11.mp4"></video>
+                            <div class="video-progress-gradient"></div>
+                            <div class="video-progress-container">
+                                <div class="video-progress-bar"></div>
+                                <div class="video-progress-time">0:00 / 0:00</div>
+                            </div>
+                            <div class="prompt">A dynamic tracking shot following a cheetah as it sprints across a savanna, the camera matching its speed and movement. The camera captures the power and grace of the cheetah’s run, the dust kicked up by its paws, and the blurred background of the fast-paced chase.</div>
+                        </div>
+                        <div class="showcase-meta">
+                            <div class="showcase-prompt-preview"></div>
+                            <div class="showcase-actions">
+                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="showcase-card">
+                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                            <div class="loading-placeholder">
+                                <div class="loading-text">Loading...</div>
+                                <div class="loading-icon">&#9749</div>
+                            </div>
+                            <video autoplay muted playsinline loop
+                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_12.mp4"></video>
+                            <div class="video-progress-gradient"></div>
+                            <div class="video-progress-container">
+                                <div class="video-progress-bar"></div>
+                                <div class="video-progress-time">0:00 / 0:00</div>
+                            </div>
+                            <div class="prompt">The camera remains still, a boy with short black hair and wearing a yellow t-shirt holds the water cup in his left hand and lifts it up, the background is a kitchen, bright morning light.</div>
+                        </div>
+                        <div class="showcase-meta">
+                            <div class="showcase-prompt-preview"></div>
+                            <div class="showcase-actions">
+                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="tab-camera" role="tabpanel">
+                <div class="showcase-grid">
+                    <div class="showcase-card">
+                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                            <div class="loading-placeholder">
+                                <div class="loading-text">Loading...</div>
+                                <div class="loading-icon">&#9749</div>
+                            </div>
+                            <video autoplay muted playsinline loop
+                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_13.mp4"></video>
+                            <div class="video-progress-gradient"></div>
+                            <div class="video-progress-container">
+                                <div class="video-progress-bar"></div>
+                                <div class="video-progress-time">0:00 / 0:00</div>
+                            </div>
+                            <div class="prompt">A man runs through a forest with the camera fixed to his chest, showing his frantic expressions and the trees rushing past in a blur.</div>
+                        </div>
+                        <div class="showcase-meta">
+                            <div class="showcase-prompt-preview"></div>
+                            <div class="showcase-actions">
+                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="showcase-card">
+                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                            <div class="loading-placeholder">
+                                <div class="loading-text">Loading...</div>
+                                <div class="loading-icon">&#9749</div>
+                            </div>
+                            <video autoplay muted playsinline loop
+                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_14.mp4"></video>
+                            <div class="video-progress-gradient"></div>
+                            <div class="video-progress-container">
+                                <div class="video-progress-bar"></div>
+                                <div class="video-progress-time">0:00 / 0:00</div>
+                            </div>
+                            <div class="prompt">A high-paced shot of a pack of wolves working together to hunt a deer in a forest. The camera captures their coordinated movements, strategic positioning, and the silent communication among the pack members as they close in on their prey.</div>
+                        </div>
+                        <div class="showcase-meta">
+                            <div class="showcase-prompt-preview"></div>
+                            <div class="showcase-actions">
+                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="showcase-card">
+                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                            <div class="loading-placeholder">
+                                <div class="loading-text">Loading...</div>
+                                <div class="loading-icon">&#9749</div>
+                            </div>
+                            <video autoplay muted playsinline loop
+                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_15.mp4"></video>
+                            <div class="video-progress-gradient"></div>
+                            <div class="video-progress-container">
+                                <div class="video-progress-bar"></div>
+                                <div class="video-progress-time">0:00 / 0:00</div>
+                            </div>
+                            <div class="prompt">The camera remains still, a boy with short blonde hair and wearing a green shirt blew gas into the balloon, the background is a bright living room, soft afternoon light.</div>
+                        </div>
+                        <div class="showcase-meta">
+                            <div class="showcase-prompt-preview"></div>
+                            <div class="showcase-actions">
+                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="showcase-card">
+                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                            <div class="loading-placeholder">
+                                <div class="loading-text">Loading...</div>
+                                <div class="loading-icon">&#9749</div>
+                            </div>
+                            <video autoplay playsinline muted loop
+                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_16.mp4"></video>
+                            <div class="video-progress-gradient"></div>
+                            <div class="video-progress-container">
+                                <div class="video-progress-bar"></div>
+                                <div class="video-progress-time">0:00 / 0:00</div>
+                            </div>
+                            <div class="prompt">The camera remains still, a muscular athlete in a blue jersey rides a mountain bike uphill, the background is a forested trail, bright midday sunlight.</div>
+                        </div>
+                        <div class="showcase-meta">
+                            <div class="showcase-prompt-preview"></div>
+                            <div class="showcase-actions">
+                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="showcase-card">
+                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                            <div class="loading-placeholder">
+                                <div class="loading-text">Loading...</div>
+                                <div class="loading-icon">&#9749</div>
+                            </div>
+                            <video autoplay playsinline muted loop
+                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_17.mp4"></video>
+                            <div class="video-progress-gradient"></div>
+                            <div class="video-progress-container">
+                                <div class="video-progress-bar"></div>
+                                <div class="video-progress-time">0:00 / 0:00</div>
+                            </div>
+                            <div class="prompt">The camera remains still, a woman with long black hair and wearing a green sweater walks towards the sofa in the living room and sits on it after reaching it, the background is a modern living room, warm ambient lighting.</div>
+                        </div>
+                        <div class="showcase-meta">
+                            <div class="showcase-prompt-preview"></div>
+                            <div class="showcase-actions">
+                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="showcase-card">
+                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                            <div class="loading-placeholder">
+                                <div class="loading-text">Loading...</div>
+                                <div class="loading-icon">&#9749</div>
+                            </div>
+                            <video autoplay playsinline muted loop
+                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_18.mp4"></video>
+                            <div class="video-progress-gradient"></div>
+                            <div class="video-progress-container">
+                                <div class="video-progress-bar"></div>
+                                <div class="video-progress-time">0:00 / 0:00</div>
+                            </div>
+                            <div class="prompt">The camera remains still, a woman with long brown hair and wearing a white blouse puts on black sunglasses with her hands, the background is a sunny beach, bright midday sunlight.</div>
+                        </div>
+                        <div class="showcase-meta">
+                            <div class="showcase-prompt-preview"></div>
+                            <div class="showcase-actions">
+                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="multimodal-editing">
+        <div class="title">
+            Multimodal Editing
+        </div>
+
+        <div class="description">
+            Showcases for instruction-based image editing and video editing.
+        </div>
+
+        <ul class="nav nav-pills justify-content-center showcase-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="pill" href="#tab-image-editing" role="tab">Image Editing</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="pill" href="#tab-video-editing" role="tab">Video Editing</a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="tab-image-editing" role="tabpanel">
+                <div class="showcase-grid">
+                    <div class="showcase-card">
+                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                            <img class="edit-image" src="./assets/image_edit_1.png" alt="Image editing result 1"
+                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="edit-placeholder" style="display: none;">Upload assets/image_edit_1.png</div>
+                            <div class="prompt">Replace the background with a futuristic city at night, keep the subject unchanged.</div>
+                        </div>
+                        <div class="showcase-meta">
+                            <div class="showcase-prompt-preview"></div>
+                            <div class="showcase-actions">
+                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="showcase-card">
+                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                            <img class="edit-image" src="./assets/image_edit_2.png" alt="Image editing result 2"
+                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="edit-placeholder" style="display: none;">Upload assets/image_edit_2.png</div>
+                            <div class="prompt">Change the season to winter, add light snowfall, preserve composition.</div>
+                        </div>
+                        <div class="showcase-meta">
+                            <div class="showcase-prompt-preview"></div>
+                            <div class="showcase-actions">
+                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="showcase-card">
+                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                            <img class="edit-image" src="./assets/image_edit_3.png" alt="Image editing result 3"
+                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="edit-placeholder" style="display: none;">Upload assets/image_edit_3.png</div>
+                            <div class="prompt">Turn the photo into a watercolor illustration with soft pastel tones.</div>
+                        </div>
+                        <div class="showcase-meta">
+                            <div class="showcase-prompt-preview"></div>
+                            <div class="showcase-actions">
+                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="showcase-card">
+                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                            <img class="edit-image" src="./assets/image_edit_4.png" alt="Image editing result 4"
+                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="edit-placeholder" style="display: none;">Upload assets/image_edit_4.png</div>
+                            <div class="prompt">Add a warm golden-hour lighting effect, keep details sharp.</div>
+                        </div>
+                        <div class="showcase-meta">
+                            <div class="showcase-prompt-preview"></div>
+                            <div class="showcase-actions">
+                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="showcase-card">
+                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                            <img class="edit-image" src="./assets/image_edit_5.png" alt="Image editing result 5"
+                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="edit-placeholder" style="display: none;">Upload assets/image_edit_5.png</div>
+                            <div class="prompt">Change the outfit color to red while preserving fabric texture.</div>
+                        </div>
+                        <div class="showcase-meta">
+                            <div class="showcase-prompt-preview"></div>
+                            <div class="showcase-actions">
+                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="showcase-card">
+                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                            <img class="edit-image" src="./assets/image_edit_6.png" alt="Image editing result 6"
+                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="edit-placeholder" style="display: none;">Upload assets/image_edit_6.png</div>
+                            <div class="prompt">Remove the object on the table and inpaint the missing area naturally.</div>
+                        </div>
+                        <div class="showcase-meta">
+                            <div class="showcase-prompt-preview"></div>
+                            <div class="showcase-actions">
+                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="tab-video-editing" role="tabpanel">
+                <div class="showcase-grid">
+                    <div class="showcase-card">
+                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                            <div class="loading-placeholder">
+                                <div class="loading-text">Loading...</div>
+                                <div class="loading-icon">&#9749</div>
+                            </div>
+                            <video autoplay muted playsinline loop
+                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_7.mp4"></video>
+                            <div class="video-progress-gradient"></div>
+                            <div class="video-progress-container">
+                                <div class="video-progress-bar"></div>
+                                <div class="video-progress-time">0:00 / 0:00</div>
+                            </div>
+                            <div class="prompt">Add gentle snowfall to the scene while keeping motion consistent.</div>
+                        </div>
+                        <div class="showcase-meta">
+                            <div class="showcase-prompt-preview"></div>
+                            <div class="showcase-actions">
+                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="showcase-card">
+                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                            <div class="loading-placeholder">
+                                <div class="loading-text">Loading...</div>
+                                <div class="loading-icon">&#9749</div>
+                            </div>
+                            <video autoplay muted playsinline loop
+                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_8.mp4"></video>
+                            <div class="video-progress-gradient"></div>
+                            <div class="video-progress-container">
+                                <div class="video-progress-bar"></div>
+                                <div class="video-progress-time">0:00 / 0:00</div>
+                            </div>
+                            <div class="prompt">Change the color palette to a cinematic teal-and-orange grade.</div>
+                        </div>
+                        <div class="showcase-meta">
+                            <div class="showcase-prompt-preview"></div>
+                            <div class="showcase-actions">
+                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="showcase-card">
+                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                            <div class="loading-placeholder">
+                                <div class="loading-text">Loading...</div>
+                                <div class="loading-icon">&#9749</div>
+                            </div>
+                            <video autoplay muted playsinline loop
+                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_9.mp4"></video>
+                            <div class="video-progress-gradient"></div>
+                            <div class="video-progress-container">
+                                <div class="video-progress-bar"></div>
+                                <div class="video-progress-time">0:00 / 0:00</div>
+                            </div>
+                            <div class="prompt">Add a neon sign reflection effect on surrounding surfaces.</div>
+                        </div>
+                        <div class="showcase-meta">
+                            <div class="showcase-prompt-preview"></div>
+                            <div class="showcase-actions">
+                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="showcase-card">
+                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                            <div class="loading-placeholder">
+                                <div class="loading-text">Loading...</div>
+                                <div class="loading-icon">&#9749</div>
+                            </div>
+                            <video autoplay muted playsinline loop
+                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_10.mp4"></video>
+                            <div class="video-progress-gradient"></div>
+                            <div class="video-progress-container">
+                                <div class="video-progress-bar"></div>
+                                <div class="video-progress-time">0:00 / 0:00</div>
+                            </div>
+                            <div class="prompt">Replace the background with a snowy mountain while keeping the subject.</div>
+                        </div>
+                        <div class="showcase-meta">
+                            <div class="showcase-prompt-preview"></div>
+                            <div class="showcase-actions">
+                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="showcase-card">
+                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                            <div class="loading-placeholder">
+                                <div class="loading-text">Loading...</div>
+                                <div class="loading-icon">&#9749</div>
+                            </div>
+                            <video autoplay muted playsinline loop
+                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_11.mp4"></video>
+                            <div class="video-progress-gradient"></div>
+                            <div class="video-progress-container">
+                                <div class="video-progress-bar"></div>
+                                <div class="video-progress-time">0:00 / 0:00</div>
+                            </div>
+                            <div class="prompt">Add a light rain effect and wet ground reflections.</div>
+                        </div>
+                        <div class="showcase-meta">
+                            <div class="showcase-prompt-preview"></div>
+                            <div class="showcase-actions">
+                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="showcase-card">
+                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                            <div class="loading-placeholder">
+                                <div class="loading-text">Loading...</div>
+                                <div class="loading-icon">&#9749</div>
+                            </div>
+                            <video autoplay muted playsinline loop
+                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_12.mp4"></video>
+                            <div class="video-progress-gradient"></div>
+                            <div class="video-progress-container">
+                                <div class="video-progress-bar"></div>
+                                <div class="video-progress-time">0:00 / 0:00</div>
+                            </div>
+                            <div class="prompt">Turn the scene into an anime style while preserving motion.</div>
+                        </div>
+                        <div class="showcase-meta">
+                            <div class="showcase-prompt-preview"></div>
+                            <div class="showcase-actions">
+                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="ethics-section">
+        <h3>Ethical Considerations</h3>
+        <p>
+            The insertion condition images and videos used in these examples are sourced from publicly available
+            channels or generated by
+            models, and are intended solely to demonstrate the capabilities of this research. If there are any concerns,
+            please contact us (lijunqiao.123@bytedance.com) and we will remove the relevant examples in time.
+        </p>
+    </section>
+
+    <section class="bibtex-section">
+        <h3>BibTeX</h3>
+        <pre class="bibtex-code">@misc{bytedance_mammothmoda2_2025,
+  title = {MammothModa2: A Unified AR-Diffusion Framework for Multimodal Understanding and Generation},
+  author = {ByteDance Research},
+  year = {2025},
+  howpublished = {\url{https://github.com/bytedance/mammothmoda}},
+  note = {Code and models}
+}</pre>
+    </section>
+
+    <div class="modal fade" id="promptModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content" style="border-radius: 18px; overflow: hidden;">
+                <div class="modal-header" style="border: 0; padding: 18px 18px 0 18px;">
+                    <h5 class="modal-title" style="margin: 0; font-weight: 700;">Prompt</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="padding: 14px 18px 18px 18px;">
+                    <pre class="prompt-modal-text" style="margin: 0; white-space: pre-wrap; font-family: var(--font-mono); font-size: 13px; color: var(--text); background: var(--bg-alt); border: 1px solid var(--border); border-radius: 14px; padding: 14px;"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script>
+    // 虚拟进度条功能
+    function formatTime(seconds) {
+        if (isNaN(seconds) || !isFinite(seconds)) return '0:00';
+        var mins = Math.floor(seconds / 60);
+        var secs = Math.floor(seconds % 60);
+        return mins + ':' + (secs < 10 ? '0' : '') + secs;
+    }
+
+    function updateProgressBar(video) {
+        // 支持两种容器：.video-wrapper 和 .prompt-wrap
+        var wrapper = $(video).closest('.video-wrapper, .prompt-wrap');
+        var progressBar = wrapper.find('.video-progress-bar');
+        var progressTime = wrapper.find('.video-progress-time');
+
+        if (video.duration && video.duration > 0) {
+            var percent = (video.currentTime / video.duration) * 100;
+            progressBar.css('width', percent + '%');
+            progressTime.text(formatTime(video.currentTime) + ' / ' + formatTime(video.duration));
+        }
+    }
+
+    // 为所有带进度条的视频绑定事件
+    $('video').each(function () {
+        var video = this;
+        var wrapper = $(video).closest('.video-wrapper, .prompt-wrap');
+        var progressContainer = wrapper.find('.video-progress-container');
+
+        // 如果该视频没有进度条容器，跳过
+        if (progressContainer.length === 0) return;
+
+        // 更新进度
+        $(video).on('timeupdate', function () {
+            updateProgressBar(video);
+        });
+
+        // 视频加载后初始化时间显示
+        $(video).on('loadedmetadata', function () {
+            updateProgressBar(video);
+        });
+    });
+
+    $('.showcase-card').each(function () {
+        var prompt = $(this).find('.prompt').text().trim();
+        $(this).find('.showcase-prompt-preview').text(prompt);
+    });
+
+    $('#promptModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var card = button.closest('.showcase-card');
+        var prompt = card.find('.prompt').text().trim();
+        $(this).find('.prompt-modal-text').text(prompt);
+    });
+</script>
+
+</html>
