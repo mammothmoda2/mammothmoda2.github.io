@@ -113,6 +113,30 @@
             color: var(--text);
         }
 
+        #intro .intro-subtitle {
+            margin: -26px auto 28px auto;
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--muted);
+            line-height: 1.6;
+            max-width: 920px;
+            width: 86%;
+        }
+
+        #intro .intro-subtitle .intro-highlight {
+            font-weight: 650;
+            color: var(--accent-1);
+        }
+
+        @supports (-webkit-background-clip: text) {
+            #intro .intro-subtitle .intro-highlight {
+                background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+            }
+        }
+
         .authors {
             max-width: 900px;
             font-size: 16px;
@@ -982,7 +1006,8 @@
                 <img id="title-icon" src="./assets/logo.png" alt="Icon">
                 <h1><strong>MammothModa</strong></h1>
             </div>
-            <h2><strong>A Unified AR-Diffusion Framework for Multimodal Understanding and Generation</strong></h2>
+            <h2><strong>A Unified AR-Diffusion Framework for Visual Understanding and Generation</strong></h2>
+            <div class="intro-subtitle">Equipped with a <span class="intro-highlight">Frontier Mixture-of-Experts DiT</span> for Video Generation</div>
             <div class="authors">
                 
             </div>
@@ -1064,7 +1089,7 @@
 
                 <div class="highlights-row">
                     <div class="highlight-media">
-                        <img class="highlight-figure" src="./assets/highlight_benchmark.png?v=3"
+                        <img class="highlight-figure" src="./assets/highlight_benchmark.png?v=7"
                             alt="Inference latency and VBench2 radar comparison"
                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         <div class="highlight-placeholder" style="display: none;">
@@ -1075,7 +1100,7 @@
                         <div class="highlight-title">Efficient & Strong on Public Benchmarks</div>
                         <p class="highlight-text">
                             Mammoth25 (20B-A4.5B) delivers 11–15× lower video latency than state-of-the-art video generators（e.g., LongCat-Video） while maintaining
-                            strong quality on VBench2 with a 60.97% total score.
+                            strong performance on VBench2 with a 60.97% total score.
                         </p>
                     </div>
                 </div>
@@ -1625,7 +1650,7 @@
     <section class="bibtex-section">
         <h3>BibTeX</h3>
         <pre class="bibtex-code">@misc{bytedance_mammothmoda2_2025,
-  title = {MammothModa2: A Unified AR-Diffusion Framework for Multimodal Understanding and Generation},
+  title = {MammothModa2: A Unified AR-Diffusion Framework for  Understanding and Generation},
   author = {ByteDance Research},
   year = {2025},
   howpublished = {\url{https://github.com/bytedance/mammothmoda}},
