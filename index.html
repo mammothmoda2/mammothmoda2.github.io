@@ -990,7 +990,9 @@
             <a class="button" href="https://github.com/bytedance/mammothmoda" target="_blank" rel="noopener noreferrer">
                 GitHub
             </a>
- 
+            <a class="button" href="https://arxiv.org/abs/2511.18262" target="_blank" rel="noopener noreferrer">
+                Tech Report
+            </a>
         </div>
     </section>
 
@@ -1019,7 +1021,7 @@
         </div>
 
         <div class="description">
-            MammothModa2 adopts a Mixture-of-Experts DiT backbone and unified multimodal AR-diffusion framework, achieving strong performance across text-to-image, image editing, and text-to-video benchmarks.
+            MammothModa2 is built around a Mixture-of-Experts DiT backbone that unifies multimodal understanding and generation within a single AR-Diffusion architecture.
         </div>
 
         <div class="highlights-wrap">
@@ -1070,11 +1072,70 @@
                         </div>
                     </div>
                     <div class="highlight-body">
-                        <div class="highlight-title">Strong Benchmark Performance</div>
+                        <div class="highlight-title">Efficient & Strong on Public Benchmarks</div>
                         <p class="highlight-text">
-                            Consistently strong results across text-to-image, image editing, and video generation
-                            benchmarks while maintaining practical inference latency.
+                            MammothModa2.5 (20B) achieves 129s video latency on our benchmark setup while delivering
+                            competitive VBench2 scores across creativity, commonsense, controllability, human fidelity,
+                            and physics.
                         </p>
+                        <div style="overflow-x: auto; margin-top: 14px;">
+                            <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                                <thead>
+                                    <tr style="background: rgba(15,23,42,0.03);">
+                                        <th style="padding: 6px 8px; text-align: left;">Model</th>
+                                        <th style="padding: 6px 8px; text-align: left;">Model size</th>
+                                        <th style="padding: 6px 8px; text-align: right;">Creativity↑</th>
+                                        <th style="padding: 6px 8px; text-align: right;">Commonsense↑</th>
+                                        <th style="padding: 6px 8px; text-align: right;">Controllability↑</th>
+                                        <th style="padding: 6px 8px; text-align: right;">Human Fidelity↑</th>
+                                        <th style="padding: 6px 8px; text-align: right;">Physics↑</th>
+                                        <th style="padding: 6px 8px; text-align: right;">Total score↑</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="padding: 6px 8px; border-top: 1px solid var(--border);">HunyuanVideo1.0</td>
+                                        <td style="padding: 6px 8px; border-top: 1px solid var(--border);">13B</td>
+                                        <td style="padding: 6px 8px; text-align: right; border-top: 1px solid var(--border);">41.84%</td>
+                                        <td style="padding: 6px 8px; text-align: right; border-top: 1px solid var(--border);">63.44%</td>
+                                        <td style="padding: 6px 8px; text-align: right; border-top: 1px solid var(--border);">28.60%</td>
+                                        <td style="padding: 6px 8px; text-align: right; border-top: 1px solid var(--border);">82.41%</td>
+                                        <td style="padding: 6px 8px; text-align: right; border-top: 1px solid var(--border);">60.20%</td>
+                                        <td style="padding: 6px 8px; text-align: right; border-top: 1px solid var(--border);">55.30%</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 6px 8px; border-top: 1px solid var(--border);">Wan2.1</td>
+                                        <td style="padding: 6px 8px; border-top: 1px solid var(--border);">14B</td>
+                                        <td style="padding: 6px 8px; text-align: right; border-top: 1px solid var(--border);">55.25%</td>
+                                        <td style="padding: 6px 8px; text-align: right; border-top: 1px solid var(--border);">63.98%</td>
+                                        <td style="padding: 6px 8px; text-align: right; border-top: 1px solid var(--border);">37.32%</td>
+                                        <td style="padding: 6px 8px; text-align: right; border-top: 1px solid var(--border);">81.60%</td>
+                                        <td style="padding: 6px 8px; text-align: right; border-top: 1px solid var(--border);">62.84%</td>
+                                        <td style="padding: 6px 8px; text-align: right; border-top: 1px solid var(--border);">60.20%</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 6px 8px; border-top: 1px solid var(--border);">LongCatVideo</td>
+                                        <td style="padding: 6px 8px; border-top: 1px solid var(--border);">13B</td>
+                                        <td style="padding: 6px 8px; text-align: right; border-top: 1px solid var(--border);">54.73%</td>
+                                        <td style="padding: 6px 8px; text-align: right; border-top: 1px solid var(--border);">70.94%</td>
+                                        <td style="padding: 6px 8px; text-align: right; border-top: 1px solid var(--border);">44.79%</td>
+                                        <td style="padding: 6px 8px; text-align: right; border-top: 1px solid var(--border);">80.20%</td>
+                                        <td style="padding: 6px 8px; text-align: right; border-top: 1px solid var(--border);">59.92%</td>
+                                        <td style="padding: 6px 8px; text-align: right; border-top: 1px solid var(--border);">62.11%</td>
+                                    </tr>
+                                    <tr style="font-weight: 600;">
+                                        <td style="padding: 6px 8px; border-top: 1px solid var(--border);">MammothModa2.5</td>
+                                        <td style="padding: 6px 8px; border-top: 1px solid var(--border);">20B A4.5B</td>
+                                        <td style="padding: 6px 8px; text-align: right; border-top: 1px solid var(--border);">53.81%</td>
+                                        <td style="padding: 6px 8px; text-align: right; border-top: 1px solid var(--border);">71.54%</td>
+                                        <td style="padding: 6px 8px; text-align: right; border-top: 1px solid var(--border);">36.97%</td>
+                                        <td style="padding: 6px 8px; text-align: right; border-top: 1px solid var(--border);">80.70%</td>
+                                        <td style="padding: 6px 8px; text-align: right; border-top: 1px solid var(--border);">61.85%</td>
+                                        <td style="padding: 6px 8px; text-align: right; border-top: 1px solid var(--border);">60.97%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1597,149 +1658,14 @@
         </div>
 
         <div class="subsection-label">
-            Video Editing
+            Video Editing (Coming Soon)
         </div>
         <div class="showcase-grid">
             <div class="showcase-card">
-                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                    <div class="loading-placeholder">
-                        <div class="loading-text">Loading...</div>
-                        <div class="loading-icon">&#9749</div>
-                    </div>
-                    <video autoplay muted playsinline loop
-                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_7.mp4"></video>
-                    <div class="video-progress-gradient"></div>
-                    <div class="video-progress-container">
-                        <div class="video-progress-bar"></div>
-                        <div class="video-progress-time">0:00 / 0:00</div>
-                    </div>
-                    <div class="prompt">Add gentle snowfall to the scene while keeping motion consistent.</div>
-                </div>
-                <div class="showcase-meta">
-                    <div class="showcase-prompt-preview"></div>
-                    <div class="showcase-actions">
-                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="showcase-card">
-                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                    <div class="loading-placeholder">
-                        <div class="loading-text">Loading...</div>
-                        <div class="loading-icon">&#9749</div>
-                    </div>
-                    <video autoplay muted playsinline loop
-                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_8.mp4"></video>
-                    <div class="video-progress-gradient"></div>
-                    <div class="video-progress-container">
-                        <div class="video-progress-bar"></div>
-                        <div class="video-progress-time">0:00 / 0:00</div>
-                    </div>
-                    <div class="prompt">Change the color palette to a cinematic teal-and-orange grade.</div>
-                </div>
-                <div class="showcase-meta">
-                    <div class="showcase-prompt-preview"></div>
-                    <div class="showcase-actions">
-                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="showcase-card">
-                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                    <div class="loading-placeholder">
-                        <div class="loading-text">Loading...</div>
-                        <div class="loading-icon">&#9749</div>
-                    </div>
-                    <video autoplay muted playsinline loop
-                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_9.mp4"></video>
-                    <div class="video-progress-gradient"></div>
-                    <div class="video-progress-container">
-                        <div class="video-progress-bar"></div>
-                        <div class="video-progress-time">0:00 / 0:00</div>
-                    </div>
-                    <div class="prompt">Add a neon sign reflection effect on surrounding surfaces.</div>
-                </div>
-                <div class="showcase-meta">
-                    <div class="showcase-prompt-preview"></div>
-                    <div class="showcase-actions">
-                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="showcase-card">
-                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                    <div class="loading-placeholder">
-                        <div class="loading-text">Loading...</div>
-                        <div class="loading-icon">&#9749</div>
-                    </div>
-                    <video autoplay muted playsinline loop
-                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_10.mp4"></video>
-                    <div class="video-progress-gradient"></div>
-                    <div class="video-progress-container">
-                        <div class="video-progress-bar"></div>
-                        <div class="video-progress-time">0:00 / 0:00</div>
-                    </div>
-                    <div class="prompt">Replace the background with a snowy mountain while keeping the subject.</div>
-                </div>
-                <div class="showcase-meta">
-                    <div class="showcase-prompt-preview"></div>
-                    <div class="showcase-actions">
-                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="showcase-card">
-                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                    <div class="loading-placeholder">
-                        <div class="loading-text">Loading...</div>
-                        <div class="loading-icon">&#9749</div>
-                    </div>
-                    <video autoplay muted playsinline loop
-                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_11.mp4"></video>
-                    <div class="video-progress-gradient"></div>
-                    <div class="video-progress-container">
-                        <div class="video-progress-bar"></div>
-                        <div class="video-progress-time">0:00 / 0:00</div>
-                    </div>
-                    <div class="prompt">Add a light rain effect and wet ground reflections.</div>
-                </div>
-                <div class="showcase-meta">
-                    <div class="showcase-prompt-preview"></div>
-                    <div class="showcase-actions">
-                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="showcase-card">
-                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                    <div class="loading-placeholder">
-                        <div class="loading-text">Loading...</div>
-                        <div class="loading-icon">&#9749</div>
-                    </div>
-                    <video autoplay muted playsinline loop
-                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_12.mp4"></video>
-                    <div class="video-progress-gradient"></div>
-                    <div class="video-progress-container">
-                        <div class="video-progress-bar"></div>
-                        <div class="video-progress-time">0:00 / 0:00</div>
-                    </div>
-                    <div class="prompt">Turn the scene into an anime style while preserving motion.</div>
-                </div>
-                <div class="showcase-meta">
-                    <div class="showcase-prompt-preview"></div>
-                    <div class="showcase-actions">
-                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                <div class="prompt-wrap full-screen-wrap" style="display: flex; align-items: center; justify-content: center; min-height: 220px;">
+                    <div class="prompt" style="max-width: 560px; text-align: center; font-size: 15px;">
+                        Video editing capabilities are under active development. Stay tuned for upcoming examples of
+                        instruction-guided and multimodal video editing with MammothModa2.
                     </div>
                 </div>
             </div>
