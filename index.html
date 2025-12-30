@@ -238,7 +238,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 16px 24px;
-            font-size: 14px;
+            font-size: clamp(18px, 2vw, 22px);
             font-weight: 700;
             letter-spacing: 0.06em;
             z-index: 1000;
@@ -255,6 +255,17 @@
             color: var(--muted);
             line-height: 1.65;
             font-weight: 420;
+        }
+
+        .subsection-label {
+            max-width: 1200px;
+            margin: 28px auto 8px auto;
+            padding: 0 24px;
+            font-size: 14px;
+            font-weight: 650;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--accent-1);
         }
 
         .highlight {
@@ -646,36 +657,64 @@
             padding: 0 24px;
         }
 
-        .highlights-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+        .highlights-list {
+            display: flex;
+            flex-direction: column;
             gap: 24px;
         }
 
-        @media (max-width: 980px) {
-            .highlights-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
+        .highlights-row {
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+            gap: 20px;
+            align-items: center;
+            padding: 18px 20px;
+            border-radius: 18px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            box-shadow: 0 14px 28px rgba(15, 23, 42, 0.06);
         }
 
-        @media (max-width: 640px) {
-            .highlights-grid {
-                grid-template-columns: 1fr;
-            }
+        .highlight-media {
+            width: 100%;
         }
 
-        .highlight {
-            padding-top: 14px;
-            border-top: 1px solid var(--border);
+        .highlight-figure {
+            width: 100%;
+            height: auto;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            display: block;
+            background: #ffffff;
+        }
+
+        .highlight-placeholder {
+            width: 100%;
+            min-height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 18px;
+            color: var(--muted);
+            background: var(--bg-alt);
+            border-radius: 14px;
+            border: 1px dashed var(--border);
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .highlight-body {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
         .highlight-title {
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 0.06em;
+            font-size: 14px;
+            font-weight: 720;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
             color: var(--text);
-            margin-bottom: 6px;
         }
 
         .highlight-text {
@@ -683,6 +722,12 @@
             font-size: 14px;
             line-height: 1.6;
             margin: 0;
+        }
+
+        @media (max-width: 980px) {
+            .highlights-row {
+                grid-template-columns: 1fr;
+            }
         }
 
         .showcase-tabs {
@@ -942,8 +987,6 @@
                 
             </div>
 
-            
-
             <a class="button" href="https://github.com/bytedance/mammothmoda" target="_blank" rel="noopener noreferrer">
                 GitHub
             </a>
@@ -951,9 +994,8 @@
         </div>
     </section>
 
-    <div class="container text-center" style="margin-top: 50px; text-align: center;">
-        <p class="title-art3" style="font-size: 1.6em;"> Unified AR-Diffusion for Multimodal Understanding and Generation</p>
-        <p class="description" style="font-size: 1.0em;"> Architectures</p>
+    <!-- <div class="container text-center" style="margin-top: 50px; text-align: center;">
+        <p class="title-art3" style="font-size: 1.6em;"> Overall Architecture</p>
     </div>
 
     <div class="arch-container">
@@ -969,42 +1011,71 @@
                 <div class="arch-placeholder" style="display: none;">Upload assets/dit_moe.png to replace this placeholder.</div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <section id="experiment-highlights">
         <div class="title">
-            Experiment Highlights
+            Experimental Highlights
         </div>
 
         <div class="description">
-            Key takeaways from our experiments across understanding, generation, and editing.
+            MammothModa2 adopts a Mixture-of-Experts DiT backbone and unified multimodal AR-diffusion framework, achieving strong performance across text-to-image, image editing, and text-to-video benchmarks.
         </div>
 
         <div class="highlights-wrap">
-            <div class="highlights-grid">
-                <div class="highlight">
-                    <div class="highlight-title">Unified Multimodal Capability</div>
-                    <p class="highlight-text">One unified model covers multimodal understanding, generation, and instruction-based editing.</p>
+            <div class="highlights-list">
+                <div class="highlights-row">
+                    <div class="highlight-media">
+                        <img class="highlight-figure" src="./assets/highlight_moe.png"
+                            alt="MoE DiT architecture and expert ablations"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="highlight-placeholder" style="display: none;">
+                            Upload assets/highlight_moe_dit.png (MoE DiT architecture / expert ablation).
+                        </div>
+                    </div>
+                    <div class="highlight-body">
+                        <div class="highlight-title">MoE DiT Architecture</div>
+                        <p class="highlight-text">
+                            First MoE-based DiT video generator with fine-grained experts that specialize over motion,
+                            content, and style, enabling scalable capacity without sacrificing efficiency.
+                        </p>
+                    </div>
                 </div>
-                <div class="highlight">
-                    <div class="highlight-title">AR Semantic Planning</div>
-                    <p class="highlight-text">Autoregressive planning provides structured semantics that improves controllability and compositionality.</p>
+
+                <div class="highlights-row">
+                    <div class="highlight-media">
+                        <img class="highlight-figure" src="./assets/highlight_unified.png?v=2"
+                            alt="Unified AR-diffusion architecture across modalities"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="highlight-placeholder" style="display: none;">
+                            Upload assets/highlight_unified.png (unified multimodal architecture diagram).
+                        </div>
+                    </div>
+                    <div class="highlight-body">
+                        <div class="highlight-title">Unified Multimodal Design</div>
+                        <p class="highlight-text">
+                            A single AR-diffusion framework that supports text-to-image, image editing, and
+                            text-to-video generation with shared representations and training recipes.
+                        </p>
+                    </div>
                 </div>
-                <div class="highlight">
-                    <div class="highlight-title">Diffusion Decoding</div>
-                    <p class="highlight-text">Diffusion decoding translates planned semantics into high-fidelity visual outputs across modalities.</p>
-                </div>
-                <div class="highlight">
-                    <div class="highlight-title">MoE DiT Scaling</div>
-                    <p class="highlight-text">MoE DiT supports scalable capacity for video generation while keeping routing flexible.</p>
-                </div>
-                <div class="highlight">
-                    <div class="highlight-title">Strong Instruction Following</div>
-                    <p class="highlight-text">Consistent instruction following across camera motion, subject actions, and stylization.</p>
-                </div>
-                <div class="highlight">
-                    <div class="highlight-title">Multimodal Editing</div>
-                    <p class="highlight-text">Unified editing interface for both images and videos with temporally coherent edits.</p>
+
+                <div class="highlights-row">
+                    <div class="highlight-media">
+                        <img class="highlight-figure" src="./assets/highlight_benchmark.png"
+                            alt="Benchmark metrics and latency comparison"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="highlight-placeholder" style="display: none;">
+                            Upload assets/highlight_benchmark.png (benchmark scores / latency comparison table).
+                        </div>
+                    </div>
+                    <div class="highlight-body">
+                        <div class="highlight-title">Strong Benchmark Performance</div>
+                        <p class="highlight-text">
+                            Consistently strong results across text-to-image, image editing, and video generation
+                            benchmarks while maintaining practical inference latency.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1016,465 +1087,408 @@
         </div>
 
         <div class="description">
-            Cards with prompt preview and a modal for full prompts.
+            MammothModa2 leverages a MoE DiT architecture to deliver strong, scalable text-to-video generation.
         </div>
 
-        <ul class="nav nav-pills justify-content-center showcase-tabs" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" data-toggle="pill" href="#tab-instruction" role="tab">Instruction Following</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="pill" href="#tab-motion" role="tab">Motion Quality</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="pill" href="#tab-camera" role="tab">Camera & Scenes</a>
-            </li>
-        </ul>
-
-        <div class="tab-content">
-            <div class="tab-pane fade show active" id="tab-instruction" role="tabpanel">
-                <div class="showcase-grid">
-                    <div class="showcase-card">
-                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                            <div class="loading-placeholder">
-                                <div class="loading-text">Loading...</div>
-                                <div class="loading-icon">&#9749</div>
-                            </div>
-                            <video autoplay muted playsinline loop
-                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_0.mp4"></video>
-                            <div class="video-progress-gradient"></div>
-                            <div class="video-progress-container">
-                                <div class="video-progress-bar"></div>
-                                <div class="video-progress-time">0:00 / 0:00</div>
-                            </div>
-                            <div class="prompt">Depict a scenario where an individual is faced with a difficult choice that tests their principles. The camera captures the weight of the decision,</div>
-                        </div>
-                        <div class="showcase-meta">
-                            <div class="showcase-prompt-preview"></div>
-                            <div class="showcase-actions">
-                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                            </div>
-                        </div>
+        <div class="subsection-label">
+            Instruction Following
+        </div>
+        <div class="showcase-grid">
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">&#9749</div>
                     </div>
-
-                    <div class="showcase-card">
-                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                            <div class="loading-placeholder">
-                                <div class="loading-text">Loading...</div>
-                                <div class="loading-icon">&#9749</div>
-                            </div>
-                            <video autoplay muted playsinline loop
-                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_1.mp4"></video>
-                            <div class="video-progress-gradient"></div>
-                            <div class="video-progress-container">
-                                <div class="video-progress-bar"></div>
-                                <div class="video-progress-time">0:00 / 0:00</div>
-                            </div>
-                            <div class="prompt">A close-up shot of a fox cautiously approaching the camera, sniffing at the lens curiously. The camera captures the fox’s inquisitive expression, the twitching of its nose, and the rustling of leaves under its paws.</div>
-                        </div>
-                        <div class="showcase-meta">
-                            <div class="showcase-prompt-preview"></div>
-                            <div class="showcase-actions">
-                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                            </div>
-                        </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Prompt_following/Prompt_following/video_60.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
                     </div>
-
-                    <div class="showcase-card">
-                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                            <div class="loading-placeholder">
-                                <div class="loading-text">Loading...</div>
-                                <div class="loading-icon">&#9749</div>
-                            </div>
-                            <video autoplay muted playsinline loop
-                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_2.mp4"></video>
-                            <div class="video-progress-gradient"></div>
-                            <div class="video-progress-container">
-                                <div class="video-progress-bar"></div>
-                                <div class="video-progress-time">0:00 / 0:00</div>
-                            </div>
-                            <div class="prompt">An aerial shot of a swarm of drones flying in formation, mimicking the behavior of a flock of birds. The camera captures the synchronized movements, the technological design of the drones, and the interplay between natural and artificial intelligence.</div>
-                        </div>
-                        <div class="showcase-meta">
-                            <div class="showcase-prompt-preview"></div>
-                            <div class="showcase-actions">
-                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="showcase-card">
-                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                            <div class="loading-placeholder">
-                                <div class="loading-text">Loading...</div>
-                                <div class="loading-icon">&#9749</div>
-                            </div>
-                            <video autoplay muted playsinline loop
-                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_3.mp4"></video>
-                            <div class="video-progress-gradient"></div>
-                            <div class="video-progress-container">
-                                <div class="video-progress-bar"></div>
-                                <div class="video-progress-time">0:00 / 0:00</div>
-                            </div>
-                            <div class="prompt">A deserted tropical island with crystal-clear waters, dense palm trees, and a sandy beach. The camera slowly pans across the island, revealing a hidden cove with a small, makeshift shelter and a campfire. The animation emphasizes the serene beauty of the natural environment, with attention to the gentle sway of the palm trees and the sparkling reflections on the water.</div>
-                        </div>
-                        <div class="showcase-meta">
-                            <div class="showcase-prompt-preview"></div>
-                            <div class="showcase-actions">
-                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="showcase-card">
-                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                            <div class="loading-placeholder">
-                                <div class="loading-text">Loading...</div>
-                                <div class="loading-icon">&#9749</div>
-                            </div>
-                            <video autoplay muted playsinline loop
-                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_4.mp4"></video>
-                            <div class="video-progress-gradient"></div>
-                            <div class="video-progress-container">
-                                <div class="video-progress-bar"></div>
-                                <div class="video-progress-time">0:00 / 0:00</div>
-                            </div>
-                            <div class="prompt">A close-up shot of a hummingbird hovering in front of a brightly colored flower, its wings a blur of motion. The camera focuses on the precision of its hovering, the quick darting movements, and the delicate sipping of nectar.</div>
-                        </div>
-                        <div class="showcase-meta">
-                            <div class="showcase-prompt-preview"></div>
-                            <div class="showcase-actions">
-                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="showcase-card">
-                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                            <div class="loading-placeholder">
-                                <div class="loading-text">Loading...</div>
-                                <div class="loading-icon">&#9749</div>
-                            </div>
-                            <video autoplay muted playsinline loop
-                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_5.mp4"></video>
-                            <div class="video-progress-gradient"></div>
-                            <div class="video-progress-container">
-                                <div class="video-progress-bar"></div>
-                                <div class="video-progress-time">0:00 / 0:00</div>
-                            </div>
-                            <div class="prompt">A wide shot of a group of friends, all in their late 20s, enjoying a sunny day in a backyard. Some are grilling food, others are sitting at a picnic table, and a couple is playing with a dog. The camera captures the laughter, the food being passed around, and the casual, friendly interactions.</div>
-                        </div>
-                        <div class="showcase-meta">
-                            <div class="showcase-prompt-preview"></div>
-                            <div class="showcase-actions">
-                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                            </div>
-                        </div>
+                    <div class="prompt">Depict a scenario where an individual is faced with a difficult choice that tests their principles. The camera captures the weight of the decision,</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
                     </div>
                 </div>
             </div>
 
-            <div class="tab-pane fade" id="tab-motion" role="tabpanel">
-                <div class="showcase-grid">
-                    <div class="showcase-card">
-                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                            <div class="loading-placeholder">
-                                <div class="loading-text">Loading...</div>
-                                <div class="loading-icon">&#9749</div>
-                            </div>
-                            <video autoplay muted playsinline loop
-                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_7.mp4"></video>
-                            <div class="video-progress-gradient"></div>
-                            <div class="video-progress-container">
-                                <div class="video-progress-bar"></div>
-                                <div class="video-progress-time">0:00 / 0:00</div>
-                            </div>
-                            <div class="prompt">Show a group of people debating a challenging decision that could have far-reaching consequences. The camera highlights the varying perspectives and moral considerations.</div>
-                        </div>
-                        <div class="showcase-meta">
-                            <div class="showcase-prompt-preview"></div>
-                            <div class="showcase-actions">
-                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                            </div>
-                        </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">&#9749</div>
                     </div>
-
-                    <div class="showcase-card">
-                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                            <div class="loading-placeholder">
-                                <div class="loading-text">Loading...</div>
-                                <div class="loading-icon">&#9749</div>
-                            </div>
-                            <video autoplay muted playsinline loop
-                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_8.mp4"></video>
-                            <div class="video-progress-gradient"></div>
-                            <div class="video-progress-container">
-                                <div class="video-progress-bar"></div>
-                                <div class="video-progress-time">0:00 / 0:00</div>
-                            </div>
-                            <div class="prompt">A static close-up shot shows a digital clock with a green number rapidly counting up from 10:47 to 12:45. The entire scene in the video remains unchanged.</div>
-                        </div>
-                        <div class="showcase-meta">
-                            <div class="showcase-prompt-preview"></div>
-                            <div class="showcase-actions">
-                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                            </div>
-                        </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Prompt_following/Prompt_following/video_11_.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
                     </div>
-
-                    <div class="showcase-card">
-                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                            <div class="loading-placeholder">
-                                <div class="loading-text">Loading...</div>
-                                <div class="loading-icon">&#9749</div>
-                            </div>
-                            <video autoplay muted playsinline loop
-                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_9.mp4"></video>
-                            <div class="video-progress-gradient"></div>
-                            <div class="video-progress-container">
-                                <div class="video-progress-bar"></div>
-                                <div class="video-progress-time">0:00 / 0:00</div>
-                            </div>
-                            <div class="prompt">The camera remains still, a girl with a ponytail and wearing a yellow dress walks forward with a metal bucket of water in her hand, the background is a garden path, soft afternoon sunlight.</div>
-                        </div>
-                        <div class="showcase-meta">
-                            <div class="showcase-prompt-preview"></div>
-                            <div class="showcase-actions">
-                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="showcase-card">
-                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                            <div class="loading-placeholder">
-                                <div class="loading-text">Loading...</div>
-                                <div class="loading-icon">&#9749</div>
-                            </div>
-                            <video autoplay muted playsinline loop
-                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_10.mp4"></video>
-                            <div class="video-progress-gradient"></div>
-                            <div class="video-progress-container">
-                                <div class="video-progress-bar"></div>
-                                <div class="video-progress-time">0:00 / 0:00</div>
-                            </div>
-                            <div class="prompt">The camera remains still, a man with a beard and wearing a green sweater holds a ceramic mug with his hand and moves it, the background is a cozy kitchen, warm indoor lighting.</div>
-                        </div>
-                        <div class="showcase-meta">
-                            <div class="showcase-prompt-preview"></div>
-                            <div class="showcase-actions">
-                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="showcase-card">
-                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                            <div class="loading-placeholder">
-                                <div class="loading-text">Loading...</div>
-                                <div class="loading-icon">&#9749</div>
-                            </div>
-                            <video autoplay muted playsinline loop
-                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_11.mp4"></video>
-                            <div class="video-progress-gradient"></div>
-                            <div class="video-progress-container">
-                                <div class="video-progress-bar"></div>
-                                <div class="video-progress-time">0:00 / 0:00</div>
-                            </div>
-                            <div class="prompt">A dynamic tracking shot following a cheetah as it sprints across a savanna, the camera matching its speed and movement. The camera captures the power and grace of the cheetah’s run, the dust kicked up by its paws, and the blurred background of the fast-paced chase.</div>
-                        </div>
-                        <div class="showcase-meta">
-                            <div class="showcase-prompt-preview"></div>
-                            <div class="showcase-actions">
-                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="showcase-card">
-                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                            <div class="loading-placeholder">
-                                <div class="loading-text">Loading...</div>
-                                <div class="loading-icon">&#9749</div>
-                            </div>
-                            <video autoplay muted playsinline loop
-                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_12.mp4"></video>
-                            <div class="video-progress-gradient"></div>
-                            <div class="video-progress-container">
-                                <div class="video-progress-bar"></div>
-                                <div class="video-progress-time">0:00 / 0:00</div>
-                            </div>
-                            <div class="prompt">The camera remains still, a boy with short black hair and wearing a yellow t-shirt holds the water cup in his left hand and lifts it up, the background is a kitchen, bright morning light.</div>
-                        </div>
-                        <div class="showcase-meta">
-                            <div class="showcase-prompt-preview"></div>
-                            <div class="showcase-actions">
-                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                            </div>
-                        </div>
+                    <div class="prompt">A close-up shot of a fox cautiously approaching the camera, sniffing at the lens curiously. The camera captures the fox’s inquisitive expression, the twitching of its nose, and the rustling of leaves under its paws.</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
                     </div>
                 </div>
             </div>
 
-            <div class="tab-pane fade" id="tab-camera" role="tabpanel">
-                <div class="showcase-grid">
-                    <div class="showcase-card">
-                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                            <div class="loading-placeholder">
-                                <div class="loading-text">Loading...</div>
-                                <div class="loading-icon">&#9749</div>
-                            </div>
-                            <video autoplay muted playsinline loop
-                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_13.mp4"></video>
-                            <div class="video-progress-gradient"></div>
-                            <div class="video-progress-container">
-                                <div class="video-progress-bar"></div>
-                                <div class="video-progress-time">0:00 / 0:00</div>
-                            </div>
-                            <div class="prompt">A man runs through a forest with the camera fixed to his chest, showing his frantic expressions and the trees rushing past in a blur.</div>
-                        </div>
-                        <div class="showcase-meta">
-                            <div class="showcase-prompt-preview"></div>
-                            <div class="showcase-actions">
-                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                            </div>
-                        </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">&#9749</div>
                     </div>
-
-                    <div class="showcase-card">
-                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                            <div class="loading-placeholder">
-                                <div class="loading-text">Loading...</div>
-                                <div class="loading-icon">&#9749</div>
-                            </div>
-                            <video autoplay muted playsinline loop
-                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_14.mp4"></video>
-                            <div class="video-progress-gradient"></div>
-                            <div class="video-progress-container">
-                                <div class="video-progress-bar"></div>
-                                <div class="video-progress-time">0:00 / 0:00</div>
-                            </div>
-                            <div class="prompt">A high-paced shot of a pack of wolves working together to hunt a deer in a forest. The camera captures their coordinated movements, strategic positioning, and the silent communication among the pack members as they close in on their prey.</div>
-                        </div>
-                        <div class="showcase-meta">
-                            <div class="showcase-prompt-preview"></div>
-                            <div class="showcase-actions">
-                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                            </div>
-                        </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Prompt_following/Prompt_following/video_24.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
                     </div>
-
-                    <div class="showcase-card">
-                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                            <div class="loading-placeholder">
-                                <div class="loading-text">Loading...</div>
-                                <div class="loading-icon">&#9749</div>
-                            </div>
-                            <video autoplay muted playsinline loop
-                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_15.mp4"></video>
-                            <div class="video-progress-gradient"></div>
-                            <div class="video-progress-container">
-                                <div class="video-progress-bar"></div>
-                                <div class="video-progress-time">0:00 / 0:00</div>
-                            </div>
-                            <div class="prompt">The camera remains still, a boy with short blonde hair and wearing a green shirt blew gas into the balloon, the background is a bright living room, soft afternoon light.</div>
-                        </div>
-                        <div class="showcase-meta">
-                            <div class="showcase-prompt-preview"></div>
-                            <div class="showcase-actions">
-                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="showcase-card">
-                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                            <div class="loading-placeholder">
-                                <div class="loading-text">Loading...</div>
-                                <div class="loading-icon">&#9749</div>
-                            </div>
-                            <video autoplay playsinline muted loop
-                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_16.mp4"></video>
-                            <div class="video-progress-gradient"></div>
-                            <div class="video-progress-container">
-                                <div class="video-progress-bar"></div>
-                                <div class="video-progress-time">0:00 / 0:00</div>
-                            </div>
-                            <div class="prompt">The camera remains still, a muscular athlete in a blue jersey rides a mountain bike uphill, the background is a forested trail, bright midday sunlight.</div>
-                        </div>
-                        <div class="showcase-meta">
-                            <div class="showcase-prompt-preview"></div>
-                            <div class="showcase-actions">
-                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="showcase-card">
-                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                            <div class="loading-placeholder">
-                                <div class="loading-text">Loading...</div>
-                                <div class="loading-icon">&#9749</div>
-                            </div>
-                            <video autoplay playsinline muted loop
-                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_17.mp4"></video>
-                            <div class="video-progress-gradient"></div>
-                            <div class="video-progress-container">
-                                <div class="video-progress-bar"></div>
-                                <div class="video-progress-time">0:00 / 0:00</div>
-                            </div>
-                            <div class="prompt">The camera remains still, a woman with long black hair and wearing a green sweater walks towards the sofa in the living room and sits on it after reaching it, the background is a modern living room, warm ambient lighting.</div>
-                        </div>
-                        <div class="showcase-meta">
-                            <div class="showcase-prompt-preview"></div>
-                            <div class="showcase-actions">
-                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="showcase-card">
-                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                            <div class="loading-placeholder">
-                                <div class="loading-text">Loading...</div>
-                                <div class="loading-icon">&#9749</div>
-                            </div>
-                            <video autoplay playsinline muted loop
-                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_18.mp4"></video>
-                            <div class="video-progress-gradient"></div>
-                            <div class="video-progress-container">
-                                <div class="video-progress-bar"></div>
-                                <div class="video-progress-time">0:00 / 0:00</div>
-                            </div>
-                            <div class="prompt">The camera remains still, a woman with long brown hair and wearing a white blouse puts on black sunglasses with her hands, the background is a sunny beach, bright midday sunlight.</div>
-                        </div>
-                        <div class="showcase-meta">
-                            <div class="showcase-prompt-preview"></div>
-                            <div class="showcase-actions">
-                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                            </div>
-                        </div>
+                    <div class="prompt">An aerial shot of a swarm of drones flying in formation, mimicking the behavior of a flock of birds. The camera captures the synchronized movements, the technological design of the drones, and the interplay between natural and artificial intelligence.</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
                     </div>
                 </div>
             </div>
+
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">&#9749</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Prompt_following/Prompt_following/video_24_.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">A deserted tropical island with crystal-clear waters, dense palm trees, and a sandy beach. The camera slowly pans across the island, revealing a hidden cove with a small, makeshift shelter and a campfire. The animation emphasizes the serene beauty of the natural environment, with attention to the gentle sway of the palm trees and the sparkling reflections on the water.</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">&#9749</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Prompt_following/Prompt_following/video_29.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">A close-up shot of a hummingbird hovering in front of a brightly colored flower, its wings a blur of motion. The camera focuses on the precision of its hovering, the quick darting movements, and the delicate sipping of nectar.</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">&#9749</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Game/Game/video_51.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">A wide shot of a group of friends, all in their late 20s, enjoying a sunny day in a backyard. Some are grilling food, others are sitting at a picnic table, and a couple is playing with a dog. The camera captures the laughter, the food being passed around, and the casual, friendly interactions.</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="subsection-label">
+            Motion Quality
+        </div>
+        <div class="showcase-grid">
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">&#9749</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Motion/Motion/video_11.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Show a group of people debating a challenging decision that could have far-reaching consequences. The camera highlights the varying perspectives and moral considerations.</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">&#9749</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Motion/Motion/video_16.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">A static close-up shot shows a digital clock with a green number rapidly counting up from 10:47 to 12:45. The entire scene in the video remains unchanged.</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">&#9749</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Motion/Motion/video_42.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">The camera remains still, a girl with a ponytail and wearing a yellow dress walks forward with a metal bucket of water in her hand, the background is a garden path, soft afternoon sunlight.</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">&#9749</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_12.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">The camera remains still, a boy with short black hair and wearing a yellow t-shirt holds the water cup in his left hand and lifts it up, the background is a kitchen, bright morning light.</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+
+        <div class="subsection-label">
+            Camera & Scenes
+        </div>
+        <div class="showcase-grid">
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">&#9749</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Scene/Scene/video_8.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">A man runs through a forest with the camera fixed to his chest, showing his frantic expressions and the trees rushing past in a blur.</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">&#9749</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Scene/Scene/video_42.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">A high-paced shot of a pack of wolves working together to hunt a deer in a forest. The camera captures their coordinated movements, strategic positioning, and the silent communication among the pack members as they close in on their prey.</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">&#9749</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Scene/Scene/video_5.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">The camera remains still, a boy with short blonde hair and wearing a green shirt blew gas into the balloon, the background is a bright living room, soft afternoon light.</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">&#9749</div>
+                    </div>
+                    <video autoplay playsinline muted loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Scene/Scene/video_74.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">The camera remains still, a muscular athlete in a blue jersey rides a mountain bike uphill, the background is a forested trail, bright midday sunlight.</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">&#9749</div>
+                    </div>
+                    <video autoplay playsinline muted loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Scene/Scene/video_8.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">The camera remains still, a woman with long black hair and wearing a green sweater walks towards the sofa in the living room and sits on it after reaching it, the background is a modern living room, warm ambient lighting.</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">&#9749</div>
+                    </div>
+                    <video autoplay playsinline muted loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_18.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">The camera remains still, a woman with long brown hair and wearing a white blouse puts on black sunglasses with her hands, the background is a sunny beach, bright midday sunlight.</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div> -->
         </div>
     </section>
 
@@ -1484,257 +1498,248 @@
         </div>
 
         <div class="description">
-            Showcases for instruction-based image editing and video editing.
+            MammothModa2 supports multimodal editing, including image editing and video editing.
         </div>
 
-        <ul class="nav nav-pills justify-content-center showcase-tabs" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" data-toggle="pill" href="#tab-image-editing" role="tab">Image Editing</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="pill" href="#tab-video-editing" role="tab">Video Editing</a>
-            </li>
-        </ul>
-
-        <div class="tab-content">
-            <div class="tab-pane fade show active" id="tab-image-editing" role="tabpanel">
-                <div class="showcase-grid">
-                    <div class="showcase-card">
-                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                            <img class="edit-image" src="./assets/image_edit_1.png" alt="Image editing result 1"
-                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="edit-placeholder" style="display: none;">Upload assets/image_edit_1.png</div>
-                            <div class="prompt">Replace the background with a futuristic city at night, keep the subject unchanged.</div>
-                        </div>
-                        <div class="showcase-meta">
-                            <div class="showcase-prompt-preview"></div>
-                            <div class="showcase-actions">
-                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="showcase-card">
-                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                            <img class="edit-image" src="./assets/image_edit_2.png" alt="Image editing result 2"
-                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="edit-placeholder" style="display: none;">Upload assets/image_edit_2.png</div>
-                            <div class="prompt">Change the season to winter, add light snowfall, preserve composition.</div>
-                        </div>
-                        <div class="showcase-meta">
-                            <div class="showcase-prompt-preview"></div>
-                            <div class="showcase-actions">
-                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="showcase-card">
-                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                            <img class="edit-image" src="./assets/image_edit_3.png" alt="Image editing result 3"
-                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="edit-placeholder" style="display: none;">Upload assets/image_edit_3.png</div>
-                            <div class="prompt">Turn the photo into a watercolor illustration with soft pastel tones.</div>
-                        </div>
-                        <div class="showcase-meta">
-                            <div class="showcase-prompt-preview"></div>
-                            <div class="showcase-actions">
-                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="showcase-card">
-                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                            <img class="edit-image" src="./assets/image_edit_4.png" alt="Image editing result 4"
-                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="edit-placeholder" style="display: none;">Upload assets/image_edit_4.png</div>
-                            <div class="prompt">Add a warm golden-hour lighting effect, keep details sharp.</div>
-                        </div>
-                        <div class="showcase-meta">
-                            <div class="showcase-prompt-preview"></div>
-                            <div class="showcase-actions">
-                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="showcase-card">
-                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                            <img class="edit-image" src="./assets/image_edit_5.png" alt="Image editing result 5"
-                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="edit-placeholder" style="display: none;">Upload assets/image_edit_5.png</div>
-                            <div class="prompt">Change the outfit color to red while preserving fabric texture.</div>
-                        </div>
-                        <div class="showcase-meta">
-                            <div class="showcase-prompt-preview"></div>
-                            <div class="showcase-actions">
-                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="showcase-card">
-                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                            <img class="edit-image" src="./assets/image_edit_6.png" alt="Image editing result 6"
-                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="edit-placeholder" style="display: none;">Upload assets/image_edit_6.png</div>
-                            <div class="prompt">Remove the object on the table and inpaint the missing area naturally.</div>
-                        </div>
-                        <div class="showcase-meta">
-                            <div class="showcase-prompt-preview"></div>
-                            <div class="showcase-actions">
-                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                            </div>
-                        </div>
+        <div class="subsection-label">
+            Image Editing
+        </div>
+        <div class="showcase-grid">
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <img class="edit-image" src="./assets/image_edit_1.png" alt="Image editing result 1"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="edit-placeholder" style="display: none;">Upload assets/image_edit_1.png</div>
+                    <div class="prompt">Replace the background with a futuristic city at night, keep the subject unchanged.</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
                     </div>
                 </div>
             </div>
 
-            <div class="tab-pane fade" id="tab-video-editing" role="tabpanel">
-                <div class="showcase-grid">
-                    <div class="showcase-card">
-                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                            <div class="loading-placeholder">
-                                <div class="loading-text">Loading...</div>
-                                <div class="loading-icon">&#9749</div>
-                            </div>
-                            <video autoplay muted playsinline loop
-                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_7.mp4"></video>
-                            <div class="video-progress-gradient"></div>
-                            <div class="video-progress-container">
-                                <div class="video-progress-bar"></div>
-                                <div class="video-progress-time">0:00 / 0:00</div>
-                            </div>
-                            <div class="prompt">Add gentle snowfall to the scene while keeping motion consistent.</div>
-                        </div>
-                        <div class="showcase-meta">
-                            <div class="showcase-prompt-preview"></div>
-                            <div class="showcase-actions">
-                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                            </div>
-                        </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <img class="edit-image" src="./assets/image_edit_2.png" alt="Image editing result 2"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="edit-placeholder" style="display: none;">Upload assets/image_edit_2.png</div>
+                    <div class="prompt">Change the season to winter, add light snowfall, preserve composition.</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
                     </div>
+                </div>
+            </div>
 
-                    <div class="showcase-card">
-                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                            <div class="loading-placeholder">
-                                <div class="loading-text">Loading...</div>
-                                <div class="loading-icon">&#9749</div>
-                            </div>
-                            <video autoplay muted playsinline loop
-                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_8.mp4"></video>
-                            <div class="video-progress-gradient"></div>
-                            <div class="video-progress-container">
-                                <div class="video-progress-bar"></div>
-                                <div class="video-progress-time">0:00 / 0:00</div>
-                            </div>
-                            <div class="prompt">Change the color palette to a cinematic teal-and-orange grade.</div>
-                        </div>
-                        <div class="showcase-meta">
-                            <div class="showcase-prompt-preview"></div>
-                            <div class="showcase-actions">
-                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                            </div>
-                        </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <img class="edit-image" src="./assets/image_edit_3.png" alt="Image editing result 3"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="edit-placeholder" style="display: none;">Upload assets/image_edit_3.png</div>
+                    <div class="prompt">Turn the photo into a watercolor illustration with soft pastel tones.</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
                     </div>
+                </div>
+            </div>
 
-                    <div class="showcase-card">
-                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                            <div class="loading-placeholder">
-                                <div class="loading-text">Loading...</div>
-                                <div class="loading-icon">&#9749</div>
-                            </div>
-                            <video autoplay muted playsinline loop
-                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_9.mp4"></video>
-                            <div class="video-progress-gradient"></div>
-                            <div class="video-progress-container">
-                                <div class="video-progress-bar"></div>
-                                <div class="video-progress-time">0:00 / 0:00</div>
-                            </div>
-                            <div class="prompt">Add a neon sign reflection effect on surrounding surfaces.</div>
-                        </div>
-                        <div class="showcase-meta">
-                            <div class="showcase-prompt-preview"></div>
-                            <div class="showcase-actions">
-                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                            </div>
-                        </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <img class="edit-image" src="./assets/image_edit_4.png" alt="Image editing result 4"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="edit-placeholder" style="display: none;">Upload assets/image_edit_4.png</div>
+                    <div class="prompt">Add a warm golden-hour lighting effect, keep details sharp.</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
                     </div>
+                </div>
+            </div>
 
-                    <div class="showcase-card">
-                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                            <div class="loading-placeholder">
-                                <div class="loading-text">Loading...</div>
-                                <div class="loading-icon">&#9749</div>
-                            </div>
-                            <video autoplay muted playsinline loop
-                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_10.mp4"></video>
-                            <div class="video-progress-gradient"></div>
-                            <div class="video-progress-container">
-                                <div class="video-progress-bar"></div>
-                                <div class="video-progress-time">0:00 / 0:00</div>
-                            </div>
-                            <div class="prompt">Replace the background with a snowy mountain while keeping the subject.</div>
-                        </div>
-                        <div class="showcase-meta">
-                            <div class="showcase-prompt-preview"></div>
-                            <div class="showcase-actions">
-                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                            </div>
-                        </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <img class="edit-image" src="./assets/image_edit_5.png" alt="Image editing result 5"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="edit-placeholder" style="display: none;">Upload assets/image_edit_5.png</div>
+                    <div class="prompt">Change the outfit color to red while preserving fabric texture.</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
                     </div>
+                </div>
+            </div>
 
-                    <div class="showcase-card">
-                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                            <div class="loading-placeholder">
-                                <div class="loading-text">Loading...</div>
-                                <div class="loading-icon">&#9749</div>
-                            </div>
-                            <video autoplay muted playsinline loop
-                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_11.mp4"></video>
-                            <div class="video-progress-gradient"></div>
-                            <div class="video-progress-container">
-                                <div class="video-progress-bar"></div>
-                                <div class="video-progress-time">0:00 / 0:00</div>
-                            </div>
-                            <div class="prompt">Add a light rain effect and wet ground reflections.</div>
-                        </div>
-                        <div class="showcase-meta">
-                            <div class="showcase-prompt-preview"></div>
-                            <div class="showcase-actions">
-                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                            </div>
-                        </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <img class="edit-image" src="./assets/image_edit_6.png" alt="Image editing result 6"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="edit-placeholder" style="display: none;">Upload assets/image_edit_6.png</div>
+                    <div class="prompt">Remove the object on the table and inpaint the missing area naturally.</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
                     </div>
+                </div>
+            </div>
+        </div>
 
-                    <div class="showcase-card">
-                        <div class="prompt-wrap full-screen-wrap" style="position: relative;">
-                            <div class="loading-placeholder">
-                                <div class="loading-text">Loading...</div>
-                                <div class="loading-icon">&#9749</div>
-                            </div>
-                            <video autoplay muted playsinline loop
-                                onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/test_cases/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_12.mp4"></video>
-                            <div class="video-progress-gradient"></div>
-                            <div class="video-progress-container">
-                                <div class="video-progress-bar"></div>
-                                <div class="video-progress-time">0:00 / 0:00</div>
-                            </div>
-                            <div class="prompt">Turn the scene into an anime style while preserving motion.</div>
-                        </div>
-                        <div class="showcase-meta">
-                            <div class="showcase-prompt-preview"></div>
-                            <div class="showcase-actions">
-                                <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
-                            </div>
-                        </div>
+        <div class="subsection-label">
+            Video Editing
+        </div>
+        <div class="showcase-grid">
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">&#9749</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_7.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Add gentle snowfall to the scene while keeping motion consistent.</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">&#9749</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_8.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Change the color palette to a cinematic teal-and-orange grade.</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">&#9749</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_9.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Add a neon sign reflection effect on surrounding surfaces.</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">&#9749</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_10.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Replace the background with a snowy mountain while keeping the subject.</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">&#9749</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_11.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Add a light rain effect and wet ground reflections.</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">&#9749</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_12.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Turn the scene into an anime style while preserving motion.</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
                     </div>
                 </div>
             </div>
