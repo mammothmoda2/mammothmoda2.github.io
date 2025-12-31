@@ -1077,7 +1077,7 @@
                     <div class="highlight-body">
                         <div class="highlight-title">MoE DiT for Video Generation at Scale</div>
                         <p class="highlight-text">
-                            MammothModa integrates a <span class="accent-highlight">Mixture-of-Experts (MoE)</span> architecture into the <span class="accent-highlight">Video Generation</span> pipeline to address the compute bottlenecks that emerge when scaling video models. MammothModa includes two MoE variants: <span class="accent-highlight">20B-A4.5B</span> (48A6) and <span class="accent-highlight">7B-A1.3B</span> (32A4). Despite having ~40% more total parameters than WanVideo 14B, the 20B model activates only <span class="accent-highlight">~20%</span> of parameters at inference, achieving up to <span class="accent-highlight">15.1×</span> faster generation.
+                            MammothModa integrates a <span class="accent-highlight">Mixture-of-Experts (MoE)</span> architecture into the <span class="accent-highlight">Video Generation</span> pipeline to address the compute bottlenecks that emerge when scaling video models. MammothModa includes two MoE variants: 20B-A4.5B (E48A6) and 7B-A1.3B (E32A4). Despite having ~40% more total parameters than WanVideo 14B, the 20B model activates only <span class="accent-highlight">~20%</span> of parameters at inference, achieving up to <span class="accent-highlight">15.1×</span> faster generation.
                         </p>
                     </div>
                 </div>
@@ -1094,7 +1094,7 @@
                     <div class="highlight-body">
                         <div class="highlight-title">Unified Multimodal Design</div>
                         <p class="highlight-text">
-                            A single AR-diffusion framework that supports text-to-image, image editing, and
+                            A single <span class="accent-highlight">AR-diffusion</span> framework built on <span class="accent-highlight">Qwen3VL</span> for multimodal understanding and an MoE DiT backbone for generation, supporting text-to-image, image editing, and
                             text-to-video generation with shared representations and training recipes.
                         </p>
                     </div>
@@ -1112,8 +1112,7 @@
                     <div class="highlight-body">
                         <div class="highlight-title">Efficient & Strong on Public Benchmarks</div>
                         <p class="highlight-text">
-                            Mammoth25 (20B-A4.5B) delivers 11–15× lower video latency than state-of-the-art video generators（e.g., LongCat-Video） while maintaining
-                            strong performance on VBench2 with a 60.97% total score.
+                            Mammoth25 (20B-A4.5B) delivers 11–15× lower video latency than state-of-the-art video generators (e.g., LongCat-Video), while achieving strong quality on VBench2.0 with a 60.97% total score, outperforming Wan2.1-14B and HunyuanVideo1.0-13B and approaching LongCat-Video-14B.
                         </p>
                     </div>
                 </div>
