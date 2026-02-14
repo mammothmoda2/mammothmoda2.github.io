@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>MammothModa</title>
     <meta name="description" content="A Unified AR-Diffusion Framework for Multimodal Understanding and Generation">
-    <meta name="keywords" content="Video Generation, Multi-Modal">
+    <meta name="keywords" content="Mammoth2.5, MammothModa, Video Generation, Video Editing, Image Generation, Image Editing, Multimodal, MoE, Mixture-of-Experts, Diffusion Transformer, AR-Diffusion">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#ffffff">
     <meta property="og:image" content="">
@@ -91,6 +91,30 @@
                 radial-gradient(900px 520px at 78% 12%, rgba(37, 99, 235, 0.12), rgba(255, 255, 255, 0) 55%),
                 linear-gradient(180deg, #ffffff 0%, var(--bg-alt) 100%);
             border-bottom: 1px solid var(--border);
+        }
+
+        .hero-figure-wrap {
+            max-width: 1100px;
+            margin: 36px auto 0 auto;
+            padding: 0 24px;
+        }
+
+        .hero-figure {
+            width: 100%;
+            height: auto;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            box-shadow: 0 14px 28px rgba(15, 23, 42, 0.06);
+            display: block;
+            background: #ffffff;
+        }
+
+        .hero-caption {
+            margin: 14px 0 0 0;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.65;
+            text-align: center;
         }
 
         #intro h1 {
@@ -762,6 +786,17 @@
             margin: 0;
         }
 
+        .highlights-row-full {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding: 18px 20px;
+            border-radius: 18px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            box-shadow: 0 14px 28px rgba(15, 23, 42, 0.06);
+        }
+
         @media (max-width: 980px) {
             .highlights-row {
                 grid-template-columns: 1fr;
@@ -1043,8 +1078,8 @@
                 <img id="title-icon" src="./assets/logo.png" alt="Icon">
                 <h1><strong>MammothModa</strong></h1>
             </div>
-            <h2><strong>A Unified AR-Diffusion Framework for Visual Understanding and Generation</strong></h2>
-            <div class="intro-subtitle">Equipped with a <span class="intro-highlight">Frontier Mixture-of-Experts DiT</span> for Video Generation</div>
+            <h2><strong>A Unified AR-Diffusion Framework for Multimodal Understanding and Generation</strong></h2>
+            <div class="intro-subtitle">Equipped with a <span class="intro-highlight">Fine-Grained Mixture-of-Experts DiT</span> for Visual Generation and Editing</div>
             <div class="authors">
                 
             </div>
@@ -1055,6 +1090,15 @@
             <a class="button" href="https://arxiv.org/abs/2511.18262" target="_blank" rel="noopener noreferrer">
                 Tech Report
             </a>
+        </div>
+
+        <div class="hero-figure-wrap">
+            <img class="hero-figure" src="./assets/highlight_benchmark.png?v=10"
+                alt="Mammoth2.5 benchmark results: video generation, video editing, and inference speed comparison">
+            <p class="hero-caption">
+                Top-tier open-source <span class="accent-highlight">video generation</span> on VBench 2.0 with <span class="accent-highlight">12–18× faster inference</span>.
+                <span class="accent-highlight">SOTA video editing</span> — #1 on OpenVE-Bench, FiVE-Bench, and Reco-Bench, surpassing Kling O1.
+            </p>
         </div>
     </section>
 
@@ -1084,7 +1128,7 @@
         </div>
 
         <div class="description">
-            MammothModa is powered by an MLLM and a Mixture-of-Experts (MoE) Diffusion Transformer (DiT), bringing multimodal understanding and generation together in a single AR-Diffusion architecture.
+            Mammoth2.5 is powered by Qwen3-VL and a fine-grained Mixture-of-Experts (MoE) Diffusion Transformer (DiT) with 128 routed experts, bringing multimodal understanding, generation, and editing together in a single AR-Diffusion architecture.
         </div>
 
         <div class="highlights-wrap">
@@ -1099,9 +1143,9 @@
                         </div>
                     </div>
                     <div class="highlight-body">
-                        <div class="highlight-title">MoE DiT for Video Generation at Scale</div>
+                        <div class="highlight-title">Effective Fine-Grained MoE Architecture</div>
                         <p class="highlight-text">
-                            MammothModa integrates a <span class="accent-highlight">Mixture-of-Experts (MoE)</span> architecture into the <span class="accent-highlight">Video Generation</span> pipeline to address the compute bottlenecks that emerge when scaling video models. MammothModa includes two MoE variants: 20B-A3B (E48A6) and 6B-A1.2B (E32A4). Despite having ~40% more total parameters than WanVideo 14B, the 20B model activates only <span class="accent-highlight">~20%</span> of parameters at inference, achieving up to <span class="accent-highlight">15.1×</span> faster generation.
+                            Mammoth2.5 employs a <span class="accent-highlight">fine-grained Mixture-of-Experts (MoE)</span> design with <span class="accent-highlight">128 routed experts</span> and Top-8 routing to scale the DiT backbone to <span class="accent-highlight">25B total parameters</span> while activating only ~3B per forward pass (~12%). This yields over <span class="accent-highlight">12× faster inference</span> than Wan2.2 A14B on a single device, and ablation studies confirm a ~2.2× convergence speedup over dense models under matched activated parameters.
                         </p>
                     </div>
                 </div>
@@ -1116,30 +1160,13 @@
                         </div>
                     </div>
                     <div class="highlight-body">
-                        <div class="highlight-title">Unified Multimodal Design</div>
+                        <div class="highlight-title">Unified Visual Generation & Editing</div>
                         <p class="highlight-text">
-                            A single <span class="accent-highlight">AR-diffusion</span> framework built on <span class="accent-highlight">Qwen3VL</span> for multimodal understanding and an MoE DiT backbone for generation, supporting text-to-image, image editing, and
-                            text-to-video generation with shared representations and training recipes.
+                            A single <span class="accent-highlight">AR-Diffusion</span> framework built on <span class="accent-highlight">Qwen3-VL</span> for multimodal understanding and an MoE DiT backbone for generation. One unified model supports <span class="accent-highlight">text-to-image, text-to-video, image editing, and video editing</span>, eliminating the need for separate task-specific models.
                         </p>
                     </div>
                 </div>
 
-                <div class="highlights-row">
-                    <div class="highlight-media">
-                        <img class="highlight-figure" src="./assets/highlight_benchmark.png?v=7"
-                            alt="Inference latency and VBench2 radar comparison"
-                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="highlight-placeholder" style="display: none;">
-                            Upload assets/highlight_benchmark.png (inference latency + VBench2 radar).
-                        </div>
-                    </div>
-                    <div class="highlight-body">
-                        <div class="highlight-title">Efficient & Strong on Public Benchmarks</div>
-                        <p class="highlight-text">
-                            Mammoth25 (20B-A3B) delivers 11–15× lower video latency than state-of-the-art video generators (e.g., LongCat-Video), while achieving strong quality on VBench2.0 with a 60.97% total score, outperforming Wan2.1-14B and HunyuanVideo1.0-13B and approaching LongCat-Video-14B.
-                        </p>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -1151,7 +1178,7 @@
         </div>
 
         <div class="description">
-            MammothModa supports various video editing capabilities, including Creative Editing, Replace, Add, Remove, and Style Transfer.
+            Mammoth2.5 achieves state-of-the-art video editing performance, ranking #1 on OpenVE-Bench, FiVE-Bench, and Reco-Bench. Below are examples across Creative Editing, Replace, Add, Remove, and Style Transfer.
         </div>
 
         <!-- Creative Category -->
@@ -2175,7 +2202,7 @@
         </div>
 
         <div class="description">
-            MammothModa leverages a MoE DiT architecture to deliver strong, scalable text-to-video generation.
+            Mammoth2.5 leverages a fine-grained MoE DiT architecture to deliver top-tier text-to-video generation quality with over 12× faster inference than dense models of comparable capacity.
         </div>
 
         <div class="subsection-label">
@@ -2772,8 +2799,7 @@
                         <div class="video-progress-bar"></div>
                         <div class="video-progress-time">0:00 / 0:00</div>
                     </div>
-                    <div class="prompt">In Van Gogh's The Starry Night, a skateboarder in modern clothing weaves between the twisted cypresses. The light and shadow effects under the starry sky complement the skateboard's trajectory
-A person stands in a pixelated world with a game style, equipped with the most gorgeous, high-resolution 8K texture pack ever created.</div>
+                    <div class="prompt">In Van Gogh's The Starry Night, a skateboarder in modern clothing weaves between the twisted cypresses. The light and shadow effects under the starry sky complement the skateboard's trajectory.</div>
                 </div>
                 <div class="showcase-meta">
                     <div class="showcase-prompt-preview"></div>
@@ -2911,11 +2937,17 @@ A person stands in a pixelated world with a game style, equipped with the most g
 
     <section class="bibtex-section">
         <h3>BibTeX</h3>
-        <pre class="bibtex-code">@article{shen2025mammothmoda2, 
-   title={MammothModa2: A Unified AR-Diffusion Framework for Multimodal Understanding and Generation}, 
-   author={Shen, Tao and Wan, Xin and Chen, Taicai and Zhang, Rui and Pan, Junwen and Lu, Dawei and Lei, Fanding and Lu, Zhilin and Yang, Yunfei and Cheng, Chen and others}, 
-   journal={arXiv preprint arXiv:2511.18262}, 
-   year={2025} 
+        <pre class="bibtex-code">@article{mammoth2.5,
+   title={MammothModa2.5: A MoE Architecture for Unified Visual Generation and Editing},
+   author={MammothModa Team},
+   year={2025}
+ }
+
+@article{shen2025mammothmoda2,
+   title={MammothModa2: A Unified AR-Diffusion Framework for Multimodal Understanding and Generation},
+   author={Shen, Tao and Wan, Xin and Chen, Taicai and Zhang, Rui and Pan, Junwen and Lu, Dawei and Lei, Fanding and Lu, Zhilin and Yang, Yunfei and Cheng, Chen and others},
+   journal={arXiv preprint arXiv:2511.18262},
+   year={2025}
  }</pre>
     </section>
 
