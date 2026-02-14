@@ -801,6 +801,29 @@
             margin: 0 auto;
         }
 
+        /* Video editing section with 2 columns per row */
+        #video-editing .showcase-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        #video-editing .prompt-wrap {
+            aspect-ratio: 32 / 9;
+        }
+
+        #video-editing .prompt-wrap video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #video-editing .showcase-meta .showcase-actions {
+            display: none;
+        }
+
+        #video-editing .showcase-prompt-preview {
+            text-align: center;
+        }
+
         @media (max-width: 1080px) {
             .showcase-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1054,6 +1077,7 @@
         </div>
     </div> -->
 
+    
     <section id="experiment-highlights">
         <div class="title">
             Experimental Highlights
@@ -1120,6 +1144,1031 @@
         </div>
     </section>
 
+
+    <section id="video-editing">
+        <div class="title">
+            Video Editing
+        </div>
+
+        <div class="description">
+            MammothModa supports various video editing capabilities, including Creative Editing, Replace, Add, Remove, and Style Transfer.
+        </div>
+
+        <!-- Creative Category -->
+        <div class="subsection-label">
+            Creative Editing
+        </div>
+        <div class="showcase-grid">
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/046_creative_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Change the person to a tree person</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/047_creative_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Change horse to ice horse</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/043_creative_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Transform Hand into Robotic Hand</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/044_creative_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Add fire effects to the hand</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/045_creative_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Transform person to elf with floating mythical beasts</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/042_creative_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Change fruit to animate egg with smile</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+
+        <!-- Replace Category -->
+        <div class="subsection-label">
+            Replace
+        </div>
+        <div class="showcase-grid">
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/031_replace_weather_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Edit weather</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/033_replace_season_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Edit season</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/035_replace_gender_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Edit gender</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/034_replace_age_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Edit age</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/041_replace_color_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Edit color</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/039_replace_background_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Edit background</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/038_replace_clothing_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Replace clothing</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/032_replace_ultraman_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Replace with Ultraman</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/036_replace_material_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Replace material</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/037_replace_object_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Replace object</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- Add Category -->
+        <div class="subsection-label">
+            Add
+        </div>
+        <div class="showcase-grid">
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/021_add_glasses_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Add glasses</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/023_add_beard_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Add beard</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/025_add_moving_dog_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Add dog</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/027_add_static_pigeon_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Add bird</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/029_add_anime_object_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Add ball</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/026_add_frog_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Add frog</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/020_add_drone_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Add drone</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/030_add_butterfly_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Add butterfly</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/022_add_backpack_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Add backpack</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/018_add_doraemon_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Add Doraemon</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Remove Category -->
+        <div class="subsection-label">
+            Remove
+        </div>
+        <div class="showcase-grid">
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/015_remove_moving_person_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Remove left person</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/014_remove_moving_person_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Remove right person</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/013_remove_moving_person_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Remove jumping person</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/012_remove_moving_person_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Remove woman</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/007_remove_hat_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Remove hat</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/010_remove_tattoo_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Remove tattoo</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/016_remove_static_object_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Remove basket</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/008_remove_object_in_hand_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Remove object in hand</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/009_remove_dog_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Remove animal</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/011_remove_car_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Remove gray car in the bottom</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            
+            
+            
+            
+        </div>
+
+        <!-- Style Category -->
+        <div class="subsection-label">
+            Style
+        </div>
+        <div class="showcase-grid">
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/000_style_chinese_ink_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Chinese ink style</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/001_style_ghibli_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Ghibli style</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/002_style_impressionist_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Impressionist style</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/003_style_ukiyoe_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Ukiyo-e style</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/004_style_watercolor_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Watercolor style</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+            <div class="showcase-card">
+                <div class="prompt-wrap full-screen-wrap" style="position: relative;">
+                    <div class="loading-placeholder">
+                        <div class="loading-text">Loading...</div>
+                        <div class="loading-icon">⏳</div>
+                    </div>
+                    <video autoplay muted playsinline loop
+                        onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/005_style_pixel_art_merged.mp4"></video>
+                    <div class="video-progress-gradient"></div>
+                    <div class="video-progress-container">
+                        <div class="video-progress-bar"></div>
+                        <div class="video-progress-time">0:00 / 0:00</div>
+                    </div>
+                    <div class="prompt">Pixel art style</div>
+                </div>
+                <div class="showcase-meta">
+                    <div class="showcase-prompt-preview"></div>
+                    <div class="showcase-actions">
+                        <button type="button" class="showcase-prompt-btn" data-toggle="modal" data-target="#promptModal">Prompt</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <section id="video-showcase">
         <div class="title">
             Text-to-Video
@@ -1857,27 +2906,6 @@ A person stands in a pixelated world with a game style, equipped with the most g
 
 
 
-        </div>
-    </section>
-
-    <section id="multimodal-editing">
-        <div class="title">
-            Multimodal Editing (Coming Soon)
-        </div>
-
-        <div class="description">
-            Multimodal editing capabilities are coming soon. Stay tuned for instruction-guided and multimodal editing features.
-        </div>
-
-        <div class="showcase-grid">
-            <div class="showcase-card">
-                <div class="prompt-wrap full-screen-wrap" style="display: flex; align-items: center; justify-content: center; min-height: 220px;">
-                    <div class="prompt" style="max-width: 560px; text-align: center; font-size: 15px;">
-                        Multimodal editing capabilities are under active development. Stay tuned for upcoming examples of
-                        instruction-guided and multimodal editing with MammothModa2.
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
