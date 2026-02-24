@@ -390,6 +390,32 @@
             width: 100%;
         }
 
+        video {
+            display: block;
+            background: #000;
+        }
+
+        video::-webkit-media-controls,
+        video::-webkit-media-controls-enclosure,
+        video::-webkit-media-controls-panel,
+        video::-webkit-media-controls-play-button,
+        video::-webkit-media-controls-start-playback-button {
+            display: none !important;
+            -webkit-appearance: none;
+        }
+
+        #video-showcase .prompt-wrap,
+        #more-cases .prompt-wrap {
+            aspect-ratio: 16 / 9;
+        }
+
+        #video-showcase .prompt-wrap video,
+        #more-cases .prompt-wrap video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         .loading-placeholder {
             position: absolute;
             top: 0;
@@ -869,6 +895,10 @@
             .showcase-grid {
                 grid-template-columns: 1fr;
             }
+
+            #video-editing .showcase-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .showcase-card {
@@ -1103,7 +1133,7 @@
         <div class="video-container" style="margin: 40px auto 0 auto; max-width: 960px; padding: 0 24px;">
             <video controls autoplay muted loop playsinline
                 style="width: 100%; border-radius: 18px; box-shadow: 0 24px 64px rgba(2, 6, 23, 0.18); aspect-ratio: 16/9; background: #000;"
-                src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/release/demo_reel.mp4">
+                data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/release/demo_reel.mp4">
             </video>
         </div>
 
@@ -1209,7 +1239,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/046_creative_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/046_creative_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -1232,7 +1262,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/047_creative_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/047_creative_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -1255,7 +1285,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/043_creative_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/043_creative_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -1278,7 +1308,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/044_creative_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/044_creative_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -1301,7 +1331,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/045_creative_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/045_creative_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -1324,7 +1354,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/042_creative_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/042_creative_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -1356,7 +1386,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/031_replace_weather_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/031_replace_weather_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -1379,7 +1409,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/033_replace_season_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/033_replace_season_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -1402,7 +1432,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/035_replace_gender_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/035_replace_gender_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -1425,7 +1455,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/034_replace_age_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/034_replace_age_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -1448,7 +1478,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/041_replace_color_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/041_replace_color_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -1471,7 +1501,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/039_replace_background_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/039_replace_background_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -1494,7 +1524,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/038_replace_clothing_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/038_replace_clothing_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -1517,7 +1547,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/032_replace_ultraman_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/032_replace_ultraman_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -1540,7 +1570,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/036_replace_material_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/036_replace_material_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -1563,7 +1593,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/037_replace_object_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/037_replace_object_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -1594,7 +1624,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/021_add_glasses_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/021_add_glasses_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -1617,7 +1647,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/023_add_beard_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/023_add_beard_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -1640,7 +1670,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/025_add_moving_dog_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/025_add_moving_dog_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -1663,7 +1693,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/027_add_static_pigeon_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/027_add_static_pigeon_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -1686,7 +1716,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/029_add_anime_object_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/029_add_anime_object_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -1709,7 +1739,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/026_add_frog_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/026_add_frog_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -1734,7 +1764,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/020_add_drone_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/020_add_drone_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -1758,13 +1788,13 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/030_add_butterfly_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/030_add_butterfly_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
                         <div class="video-progress-time">0:00 / 0:00</div>
                     </div>
-                    <div class="prompt">Add butterfly</div>
+                    <div class="prompt">Add honeybee</div>
                 </div>
                 <div class="showcase-meta">
                     <div class="showcase-prompt-preview"></div>
@@ -1782,7 +1812,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/022_add_backpack_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/022_add_backpack_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -1805,7 +1835,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/018_add_doraemon_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/018_add_doraemon_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -1835,7 +1865,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/015_remove_moving_person_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/015_remove_moving_person_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -1858,7 +1888,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/014_remove_moving_person_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/014_remove_moving_person_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -1881,7 +1911,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/013_remove_moving_person_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/013_remove_moving_person_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -1904,7 +1934,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/012_remove_moving_person_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/012_remove_moving_person_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -1927,7 +1957,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/007_remove_hat_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/007_remove_hat_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -1950,7 +1980,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/010_remove_tattoo_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/010_remove_tattoo_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -1974,7 +2004,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/016_remove_static_object_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/016_remove_static_object_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -1997,7 +2027,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/008_remove_object_in_hand_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/008_remove_object_in_hand_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2020,7 +2050,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/009_remove_dog_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/009_remove_dog_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2044,13 +2074,13 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/011_remove_car_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/011_remove_car_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
                         <div class="video-progress-time">0:00 / 0:00</div>
                     </div>
-                    <div class="prompt">Remove gray car in the bottom</div>
+                    <div class="prompt">Remove dark grey car in the bottom</div>
                 </div>
                 <div class="showcase-meta">
                     <div class="showcase-prompt-preview"></div>
@@ -2078,7 +2108,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/000_style_chinese_ink_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/000_style_chinese_ink_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2101,7 +2131,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/001_style_ghibli_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/001_style_ghibli_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2124,7 +2154,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/002_style_impressionist_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/002_style_impressionist_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2147,7 +2177,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/003_style_ukiyoe_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/003_style_ukiyoe_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2170,7 +2200,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/004_style_watercolor_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/004_style_watercolor_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2193,7 +2223,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/005_style_pixel_art_merged.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/azlieh7nuptnuhfpoz/test_cases/demo_cases/demo_cases/005_style_pixel_art_merged.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2232,7 +2262,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Prompt_following/Prompt_following/video_60.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Prompt_following/Prompt_following/video_60.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2256,7 +2286,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Prompt_following/Prompt_following/video_11_.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Prompt_following/Prompt_following/video_11_.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2280,7 +2310,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Prompt_following/Prompt_following/video_24.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Prompt_following/Prompt_following/video_24.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2304,7 +2334,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Prompt_following/Prompt_following/video_24_.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Prompt_following/Prompt_following/video_24_.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2328,7 +2358,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Prompt_following/Prompt_following/video_29.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Prompt_following/Prompt_following/video_29.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2352,7 +2382,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Game/Game/video_51.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Game/Game/video_51.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2381,7 +2411,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Motion/Motion/video_11.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Motion/Motion/video_11.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2405,7 +2435,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Motion/Motion/video_16.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Motion/Motion/video_16.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2429,7 +2459,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Motion/Motion/video_42.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Motion/Motion/video_42.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2455,7 +2485,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_12.mp4"></video>
+                        data-src="/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_12.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2484,7 +2514,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Scene/Scene/video_8.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Scene/Scene/video_8.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2508,7 +2538,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Scene/Scene/video_42.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Scene/Scene/video_42.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2532,7 +2562,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Scene/Scene/video_5.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Scene/Scene/video_5.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2556,7 +2586,7 @@
                     </div>
                     <video autoplay playsinline muted loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Scene/Scene/video_74.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Scene/Scene/video_74.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2580,7 +2610,7 @@
                     </div>
                     <video autoplay playsinline muted loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Scene/Scene/video_8.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Scene/Scene/video_8.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2604,7 +2634,7 @@
                     </div>
                     <video autoplay playsinline muted loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_18.mp4"></video>
+                        data-src="/20B_firstrun_seedance_part4_T2V_720P_93_wan22_vae_from_480p_add_digitalhuman/samples/iter_0146000_cfg4.5_apg30/iter_0146000_cfg4.5_apg30/video_18.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2640,7 +2670,7 @@
                     </div>
                     <video autoplay playsinline muted loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Random/Random/video_111.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Random/Random/video_111.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2664,7 +2694,7 @@
                     </div>
                     <video autoplay playsinline muted loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Random/Random/video_193.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Random/Random/video_193.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2688,7 +2718,7 @@
                     </div>
                     <video autoplay playsinline muted loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Random/Random/video_197.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Random/Random/video_197.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2712,7 +2742,7 @@
                     </div>
                     <video autoplay playsinline muted loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Random/Random/video_20.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Random/Random/video_20.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2736,7 +2766,7 @@
                     </div>
                     <video autoplay playsinline muted loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Random/Random/video_212.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Random/Random/video_212.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2760,7 +2790,7 @@
                     </div>
                     <video autoplay playsinline muted loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Random/Random/video_25.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Random/Random/video_25.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2784,7 +2814,7 @@
                     </div>
                     <video autoplay playsinline muted loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Random/Random/video_25_.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Random/Random/video_25_.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2808,7 +2838,7 @@
                     </div>
                     <video autoplay playsinline muted loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Random/Random/video_29.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Random/Random/video_29.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2832,7 +2862,7 @@
                     </div>
                     <video autoplay playsinline muted loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Random/Random/video_56.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Random/Random/video_56.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2856,7 +2886,7 @@
                     </div>
                     <video autoplay playsinline muted loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Random/Random/video_57.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Random/Random/video_57.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2880,7 +2910,7 @@
                     </div>
                     <video autoplay playsinline muted loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Random/Random/video_73.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Random/Random/video_73.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2904,7 +2934,7 @@
                     </div>
                     <video autoplay playsinline muted loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Random/Random/video_9.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Random/Random/video_9.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -2929,7 +2959,7 @@
                     </div>
                     <video autoplay muted playsinline loop
                         onloadeddata="this.style.display='block'; this.previousElementSibling.style.display='none';"
-                        src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Prompt_following/Prompt_following/video_11_.mp4"></video>
+                        data-src="https://lf3-static.bytednsdoc.com/obj/eden-cn/aavjzeh7vhauloz/case_study/Prompt_following/Prompt_following/video_11_.mp4"></video>
                     <div class="video-progress-gradient"></div>
                     <div class="video-progress-container">
                         <div class="video-progress-bar"></div>
@@ -3006,6 +3036,53 @@
         }
     }
 
+    // 视频按需加载：进入视口后再设置 src，避免首屏一次性请求所有视频
+    function initLazyVideos() {
+        var lazyVideos = Array.prototype.slice.call(document.querySelectorAll('video[data-src]'));
+        if (!lazyVideos.length) return;
+
+        function hydrateVideo(video) {
+            if (!video || video.dataset.loaded === 'true') return;
+            var src = video.getAttribute('data-src');
+            if (!src) return;
+
+            video.src = src;
+            video.dataset.loaded = 'true';
+            video.removeAttribute('data-src');
+            video.load();
+
+            if (video.autoplay) {
+                var playPromise = video.play();
+                if (playPromise && typeof playPromise.catch === 'function') {
+                    playPromise.catch(function () {
+                        // 忽略自动播放策略导致的拒绝
+                    });
+                }
+            }
+        }
+
+        if (!('IntersectionObserver' in window)) {
+            lazyVideos.forEach(hydrateVideo);
+            return;
+        }
+
+        var observer = new IntersectionObserver(function (entries, obs) {
+            entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                hydrateVideo(entry.target);
+                obs.unobserve(entry.target);
+            });
+        }, {
+            rootMargin: '300px 0px',
+            threshold: 0.01
+        });
+
+        lazyVideos.forEach(function (video) {
+            video.preload = 'none';
+            observer.observe(video);
+        });
+    }
+
     // 为所有带进度条的视频绑定事件
     $('video').each(function () {
         var video = this;
@@ -3025,6 +3102,8 @@
             updateProgressBar(video);
         });
     });
+
+    initLazyVideos();
 
     $('.showcase-card').each(function () {
         var prompt = $(this).find('.prompt').text().trim();
